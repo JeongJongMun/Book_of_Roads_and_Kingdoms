@@ -8,12 +8,11 @@ public class Explosion : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            //collision.GetComponent<BaseController>().OnDamaged(damage, force);
+            collision.GetComponent<EnemyController>().OnDamaged(damage, force);
         }
     }
-
-    //public void DoDestroy()
-    //{
-    //    Managers.Resource.Destroy(transform.parent.gameObject);
-    //}
+    private void Start()
+    {
+        Destroy(gameObject, 3.0f);
+    }
 }

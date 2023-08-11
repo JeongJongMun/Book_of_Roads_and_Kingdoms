@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FireballController : WeaponController
+public class CandleController : WeaponController
 {
     bool _isCool = false;
-    public override int _weaponType { get { return (int)Define.Weapons.Fireball; } }
+    public override int _weaponType { get { return (int)Define.Weapons.Candle; } }
 
     void Update()
     {

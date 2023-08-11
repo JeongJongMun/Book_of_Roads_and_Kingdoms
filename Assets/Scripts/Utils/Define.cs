@@ -10,12 +10,20 @@ public class Define
 
     public enum Weapons
     {
-        Knife = 1,
-        Fireball = 2,
-        Spin = 3,
-        Poison = 4,
-        Lightning = 101,
-        Shotgun = 102
+        Born        = 1,
+        Candle      = 2,
+        Koran       = 3,
+        Poison      = 4,
+        Cat         = 5,
+        Camel       = 6,
+        Shortbow    = 7,
+        Damascus    = 8,
+        Samshir     = 9,
+        Water       = 10,
+        Gold        = 11,
+        Shield      = 12,
+        Armor       = 13,
+
     }
     public enum MonsterStyle
     {

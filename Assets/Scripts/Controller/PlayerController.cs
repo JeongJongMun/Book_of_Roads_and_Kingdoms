@@ -61,7 +61,7 @@ public class PlayerController : BaseController
         if (!GameManager.Instance.isLive) return;
         if (collision.gameObject.tag == "Enemy")
         {
-            _stat.HP -= (int)collision.gameObject.GetComponent<Enemy>().damage;
+            _stat.HP -= (int)collision.gameObject.GetComponent<EnemyController>().damage;
             if (GameManager.Instance.health <= 0)
             {
                 //animator.SetTrigger("dead");

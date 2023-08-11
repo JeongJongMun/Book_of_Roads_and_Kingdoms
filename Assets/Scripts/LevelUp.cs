@@ -1,125 +1,49 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelUp : MonoBehaviour
 {
-    RectTransform rect;
-    Item[] items;
+    [SerializeField]
+    public GameObject[] skills;
 
     public int maxLevelNum;
-    void Awake()
-    {
-        rect = GetComponent<RectTransform>();
-        items = GetComponentsInChildren<Item>(true);
-    }
-
-    void Update()
-    {
-
-    }
-    public void Show()
-    {
-        //AudioManager.Instance.PlaySfx(AudioManager.Sfx.LevelUp);
-        //AudioManager.Instance.EffectBgm(true);
-        rect.localScale = Vector3.one;
-        GameManager.Instance.Stop();
-        Next();
-    }
-
-    public void Hide()
-    {
-        //AudioManager.Instance.PlaySfx(AudioManager.Sfx.Select);
-        //AudioManager.Instance.EffectBgm(false);
-        rect.localScale = Vector3.zero;
-        GameManager.Instance.Resume();
-
-    }
-
-    public void Select(int index)
-    {
-        items[index].OnClick();
-    }
-
-    public void Next()
-    {
-        bool[] isMaxLevel = new bool[4];
-
-        foreach (Item item in items)
-        {
-
-            item.gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i].level == items[i].data.damages.Length)
-            {
-                isMaxLevel[i] = true;
-            }
-        }
-
-        int[] ran = new int[2];
-        while (true)
-        {
-            if (maxLevelNum <= 2)
-            {
-                ran[0] = Random.Range(0, items.Length - 1);
-                ran[1] = Random.Range(0, items.Length - 1);
-            }
-            else if (maxLevelNum == 3)
-            {
-                for (int i = 0; i < items.Length; i++)
-                {
-                    if (!isMaxLevel[i])
-                    {
-                        ran[0] = i;
-                        ran[1] = i;
-                        break;
-                    }
-                }
-            }
-
-
-            if ((ran[0] != ran[1] && !isMaxLevel[ran[0]] && !isMaxLevel[ran[1]]) || maxLevelNum >= 3)
-                break;
-        }
-
-
-        for (int i = 0; i < ran.Length; i++)
-        {
-            if (maxLevelNum <= 2)
-            {
-                items[ran[i]].gameObject.SetActive(true);
-            }
-            if (maxLevelNum == 3)
-            {
-                items[ran[i]].gameObject.SetActive(true);
-                items[4].gameObject.SetActive(true);
-            }
-            if (maxLevelNum == 4)
-            {
-                items[4].gameObject.SetActive(true);
-            }
-
-        }
-
-    }
-
     public void RandomShow()
     {
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < skills.Length; i++)
         {
-            items[i].gameObject.SetActive(false);
+            skills[i].SetActive(false);
         }
         int[] ran = new int[3];
-        for(int i = 0; i < ran.Length; i++)
-        {
-            ran[i] = Random.Range(0, items.Length);
-        }
+        HashSet<int> usedIndices = new HashSet<int>(); // 이미 사용한 인덱스를 저장하는 HashSet
+
         for (int i = 0; i < ran.Length; i++)
         {
-            items[ran[i]].gameObject.SetActive(true);
+            int randomIndex;
+            do
+            {
+                randomIndex = UnityEngine.Random.Range(0, skills.Length); // 난수 생성
+            }
+            while (usedIndices.Contains(randomIndex)); // 이미 사용한 인덱스라면 다시 생성
+
+            ran[i] = randomIndex; // 난수를 배열에 할당
+            usedIndices.Add(randomIndex); // 사용한 인덱스로 표시
         }
+
+        for (int i = 0; i < ran.Length; i++)
+        {
+            Debug.Log(ran[i]);
+
+            skills[ran[i]].SetActive(true);
+        }
+    }
+
+    // 스킬 선택시 스킬 획득OR레벨업
+    public void OnClickSkill(GameObject skill)
+    {
+        Define.Weapons weaponName = (Define.Weapons)Enum.Parse(typeof(Define.Weapons), skill.transform.GetChild(1).name);
+        GameManager.Instance.GetOrSetSkill(weaponName);
+        GameManager.Instance.Resume();
+        this.gameObject.SetActive(false);
     }
 }

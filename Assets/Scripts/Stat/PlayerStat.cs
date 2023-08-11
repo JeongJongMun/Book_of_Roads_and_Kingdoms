@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
+using UnityEngine.UI;
 
 public class PlayerStat : Stat
 {
@@ -40,6 +41,7 @@ public class PlayerStat : Stat
     //    SetWeaponLevel();
     //    return true;
     //}
+
 
     public override int Level
     {
@@ -128,7 +130,7 @@ public class PlayerStat : Stat
             _exp = value;
             while (_exp >= MaxExp)
             {
-                //OnLevelUp();
+                OnLevelUp();
             }
         }
     }
@@ -167,14 +169,14 @@ public class PlayerStat : Stat
     }
 
 
-    //void OnLevelUp()
-    //{
-    //    Managers.Event.LevelUpEvent();
+    void OnLevelUp()
+    {
+        GameManager.Instance.LevelUpEvent();
 
-    //    Level += 1;
-    //    Exp = 0;
-    //    MaxExp += Math.Max(100, (long)(_maxExp * 1.1));
-    //}
+        Level += 1;
+        Exp = 0;
+        MaxExp += Math.Max(100, (long)(_maxExp * 1.1));
+    }
 
     //void SetWeaponLevel()
     //{
