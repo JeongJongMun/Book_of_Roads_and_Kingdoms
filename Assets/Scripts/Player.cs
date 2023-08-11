@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     public float moveSpeed;
     public float hitTime;
+    public Scaner scaner;
     public bool isHit;
 
 
@@ -37,7 +38,25 @@ public class Player : MonoBehaviour
     }
 
 
-
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (isHit) return;
+        if (!GameManager.Instance.isLive) return;
+        if (collision.gameObject.tag == "Enemy")
+        {
+            GameManager.Instance.health -= (int)collision.gameObject.GetComponent<Enemy>().damage;
+            if (GameManager.Instance.health <= 0)
+            {
+                //animator.SetTrigger("dead");
+                //GameManager.Instance.GameOver();
+                //GameManager.Instance.Stop();
+                return;
+            }
+            isHit = true;
+            spriter.color = new Color(1, 0.5f, 0.5f, 1);
+            Invoke("ExitHit", hitTime);
+        }
+    }
 
 
 
@@ -59,7 +78,11 @@ public class Player : MonoBehaviour
 
 
 
-
+    void ExitHit()
+    {
+        isHit = false;
+        spriter.color = Color.white;
+    }
 
 
 }
