@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -103,5 +105,38 @@ public class GameManager : MonoBehaviour
             // 무기 소환
         }
 
+    }
+    public bool isShowText;
+    public GameObject map;
+    public GameObject textPanel;
+    public int itemNum;
+
+    public void ShowText()
+    {
+        textPanel.SetActive(true);
+        textPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "조각을 " + itemNum + "개 획득했다.";
+        isShowText = true;
+        //Time.timeScale = 0;
+    }
+
+    public void HideText()
+    {
+        if (Input.GetButtonDown("Jump") && isShowText)
+        {
+            textPanel.SetActive(false);
+            //Time.timeScale = 1;
+            isShowText = false;
+        }
+    }
+    public void ShowMap()
+    {
+        if (itemNum == 3)
+        {
+            map.SetActive(true);
+        }
+    }
+    public void NextStage() //버튼
+    {
+        SceneManager.LoadScene(2);
     }
 }
