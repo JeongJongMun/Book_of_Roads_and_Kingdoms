@@ -1,5 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerController : BaseController
 {
 
@@ -13,10 +14,14 @@ public class PlayerController : BaseController
     public Scaner scaner;
     public bool isHit;
 
-
     [Header("플레이어 스텟")]
     protected PlayerStat _stat;
 
+    [Header("아이템 수집")]
+    GameObject scanObj;
+    public float scanDistance;
+    RaycastHit2D hit;
+    
 
     protected override void Init()
     {
@@ -26,16 +31,19 @@ public class PlayerController : BaseController
         _anime = GetComponent<Animator>();
         _type = Define.WorldObject.Player;
     }
-
+    void Update()
+    {
+        ScanItem();
+    }
     private void FixedUpdate()
     {
         Move();
     }
     void Move()
     {
-        float xAxis = joystick.Horizontal;
-        float yAxis = joystick.Vertical;
 
+        float xAxis = Input.GetAxisRaw("Horizontal");
+        float yAxis = Input.GetAxisRaw("Vertical");
         // Ground의 다음 위치 설정
         nextPos = new Vector3(xAxis, yAxis, 0);
 
@@ -57,7 +65,7 @@ public class PlayerController : BaseController
             if (GameManager.Instance.health <= 0)
             {
                 //animator.SetTrigger("dead");
-                GameManager.Instance.GameOver();
+                //GameManager.Instance.GameOver();
                 //GameManager.Instance.Stop();
                 return;
             }
@@ -91,4 +99,20 @@ public class PlayerController : BaseController
         //}
 
     }
+
+    public void ScanItem()
+    {
+        hit = Physics2D.CircleCast(transform.position, 2, Vector2.zero,0,LayerMask.GetMask("CollectableItem"));
+        if(hit.collider != null)
+            scanObj = hit.collider.gameObject;
+
+        if (Input.GetButtonDown("Jump") && scanObj != null)
+        {
+            GameManager.Instance.itemNum++;
+            GameManager.Instance.ShowText();
+            Destroy(scanObj);
+        }
+    }
+
+
 }
