@@ -4,7 +4,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public Player player;
+    public GameObject playerObject;
+    public PlayerController player;
     public PoolManager poolManager;
     public int playTime;
 

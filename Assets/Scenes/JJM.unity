@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 267231544}
   - component: {fileID: 267231543}
   - component: {fileID: 267231542}
+  - component: {fileID: 267231545}
   m_Layer: 0
   m_Name: UI_HPBar
   m_TagString: Untagged
@@ -517,6 +518,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &267231545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267231540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a0c0ee61b34184f8303ff5ab044887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &282501777
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +701,7 @@ GameObject:
   - component: {fileID: 382413086}
   - component: {fileID: 382413091}
   - component: {fileID: 382413092}
+  - component: {fileID: 382413093}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -835,6 +849,7 @@ Transform:
   - {fileID: 1503915420}
   - {fileID: 267231541}
   - {fileID: 53981054}
+  - {fileID: 439912926}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &382413091
@@ -866,14 +881,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28ef06731d49f8449bb2ec6352a3378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anime: {fileID: 0}
+  _type: 0
   joystick: {fileID: 1277405054}
   nextPos: {x: 0, y: 0, z: 0}
-  moveSpeed: 5
   hitTime: 0
   scaner: {fileID: 382413091}
   isHit: 0
-  animator: {fileID: 0}
-  animatorControllers: []
+--- !u!114 &382413093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382413085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640bc21040ae48e418b34aa56f3b4617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _level: 1
+  _hp: 50
+  _maxHp: 50
+  _Movespeed: 10
+  _damage: 0
+  _defense: 0
+--- !u!1 &439912925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 439912926}
+  m_Layer: 0
+  m_Name: Weapons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &439912926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439912925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 801940579}
+  m_Father: {fileID: 382413090}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &685253708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1133,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 53981054}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &801940578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 801940579}
+  - component: {fileID: 801940580}
+  m_Layer: 0
+  m_Name: Fireball
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &801940579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801940578}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 439912926}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &801940580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801940578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b0a78c27816284ea97bcc7bc94e1b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  _damage: 1
+  _speed: 1
+  _level: 1
+  _force: 1
+  _penetrate: 1
+  _countPerCreate: 1
+  _cooldown: 1
 --- !u!1 &975297288
 GameObject:
   m_ObjectHideFlags: 0
@@ -5689,7 +5805,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10251,6 +10367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d1fb87e9d602b4fa6657cea6ea14c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObject: {fileID: 382413085}
   player: {fileID: 382413092}
   poolManager: {fileID: 1510327318}
   playTime: 0
