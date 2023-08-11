@@ -107,6 +107,9 @@ MonoBehaviour:
   exp: 0
   isDead: 0
   target: {fileID: 0}
+  damagedText: {fileID: -9180108364502706584, guid: 7d9ac19910f30d24f9b84fd8214cbf84, type: 3}
+  textSpeed: 3
+  lifeTime: 3
 --- !u!114 &-8363443398811431389
 MonoBehaviour:
   m_ObjectHideFlags: 0

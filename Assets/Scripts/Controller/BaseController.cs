@@ -4,7 +4,7 @@ public abstract class BaseController : MonoBehaviour
 {
     protected Rigidbody2D _rigid;
     protected SpriteRenderer _sprite;
-    public Animator _anime;
+    public Animator _anim;
     public Define.WorldObject _type = Define.WorldObject.Unknown;
 
     private void Awake()

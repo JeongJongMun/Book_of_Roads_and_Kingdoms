@@ -8,12 +8,12 @@ public class Define
         Weapon
     }
 
-    public enum Weapons
+    public enum Skills
     {
         Born        = 1,
         Candle      = 2,
         Koran       = 3,
-        Poison      = 4,
+        Wand        = 4,
         Cat         = 5,
         Camel       = 6,
         Shortbow    = 7,

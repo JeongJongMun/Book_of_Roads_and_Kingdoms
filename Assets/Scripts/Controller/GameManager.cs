@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [Header("플레이 시간")]
     public int playTime;
 
-    public float health;
+    //public float health;
     public bool isLive;
     public int stage;
 
@@ -30,21 +30,30 @@ public class GameManager : MonoBehaviour
     [Header("스킬 선택 창")]
     public GameObject skillSelectPanel;
 
-    public Dictionary<Define.Weapons, int> weaponLevel = new Dictionary<Define.Weapons, int>()
+    [Header("스킬들 부모")]
+    public GameObject skillParent;
+
+    [Header("설정 패널")]
+    public GameObject settingPanel;
+
+    [Header("설정창 스킬 목록")]
+    public GameObject[] skillList;
+
+    public Dictionary<Define.Skills, int> weaponLevel = new Dictionary<Define.Skills, int>()
     {
-        {Define.Weapons.Born, 0},
-        {Define.Weapons.Candle , 0},
-        {Define.Weapons.Koran , 0},
-        {Define.Weapons.Poison , 0},
-        {Define.Weapons.Cat , 0},
-        {Define.Weapons.Camel , 0},
-        {Define.Weapons.Shortbow , 0},
-        {Define.Weapons.Damascus , 0},
-        {Define.Weapons.Samshir , 0},
-        {Define.Weapons.Water , 0},
-        {Define.Weapons.Gold , 0},
-        {Define.Weapons.Shield , 0},
-        {Define.Weapons.Armor , 0},
+        {Define.Skills.Born, 0},
+        {Define.Skills.Candle , 0},
+        {Define.Skills.Koran , 0},
+        {Define.Skills.Wand , 0},
+        {Define.Skills.Cat , 0},
+        {Define.Skills.Camel , 0},
+        {Define.Skills.Shortbow , 0},
+        {Define.Skills.Damascus , 0},
+        {Define.Skills.Samshir , 0},
+        {Define.Skills.Water , 0},
+        {Define.Skills.Gold , 0},
+        {Define.Skills.Shield , 0},
+        {Define.Skills.Armor , 0},
     };
 
     public static float GameTime { get; set; } = 0;
@@ -58,6 +67,11 @@ public class GameManager : MonoBehaviour
     {
         GameTime += Time.deltaTime;
         SetExpAndLevel();
+    }
+    private void Start()
+    {
+        // 게임 시작 시 스킬 하나 고름
+        LevelUpEvent();
     }
 
     public void Stop()
@@ -81,7 +95,7 @@ public class GameManager : MonoBehaviour
         // 스킬 선택창 보여주기
         skillSelectPanel.SetActive(true);
         // 랜덤 스킬 3개 보여주기
-        skillSelectPanel.GetComponent<LevelUp>().RandomShow();
+        skillSelectPanel.GetComponent<SkillSelect>().RandomShow();
         Stop();
     }
 
@@ -96,13 +110,25 @@ public class GameManager : MonoBehaviour
         exp_slider.value = (float)ratio;
         //GetText((int)Texts.LevelText).text = player.Level.ToString();
     }
-    public void GetOrSetSkill(Define.Weapons weaponName)
+    public void GetOrSetSkill(Define.Skills weaponName)
     {
         Debug.LogFormat("{0} Level {1} -> {2}", weaponName.ToString(), weaponLevel[weaponName], weaponLevel[weaponName]+1);
         weaponLevel[weaponName]++;
         if (weaponLevel[weaponName] == 1)
         {
-            // 무기 소환
+            GameObject _skill = Resources.Load<GameObject>("Skills/" + weaponName.ToString());
+            // 스킬 생성
+            Instantiate(_skill, skillParent.transform);
+            // 스킬을 설정창에 표시
+            foreach (GameObject skill in skillList)
+            {
+                if (!skill.activeSelf)
+                {
+                    skill.SetActive(true);
+                    skill.transform.GetChild(0).GetComponent<TMP_Text>().text = weaponName.ToString() + "\n" + "Lv " + weaponLevel[weaponName];
+                    break;
+                }
+            }
         }
 
     }
@@ -138,5 +164,14 @@ public class GameManager : MonoBehaviour
     public void NextStage() //버튼
     {
         SceneManager.LoadScene(2);
+    }
+
+    // 설정 버튼
+    public void OnClickSettingBtn()
+    {
+        settingPanel.SetActive(!settingPanel.activeSelf);
+        if (Time.timeScale == 0)
+            Resume();
+        else Stop();
     }
 }

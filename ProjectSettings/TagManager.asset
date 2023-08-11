@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Bullet
   - CollectableItem
+  - Skill
   layers:
   - Default
   - TransparentFX

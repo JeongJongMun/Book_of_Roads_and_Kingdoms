@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -16,6 +17,16 @@ public class EnemyController : MonoBehaviour
     Animator anim;
     WaitForFixedUpdate wait;
     Collider2D coll;
+
+    [Header("피격 데미지 텍스트")]
+    public TMP_Text damagedText;
+
+    [Header("피격 데미지 속도")]
+    public float textSpeed;
+
+    [Header("피격 데미지 지속시간")]
+    public float lifeTime;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -61,7 +72,13 @@ public class EnemyController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Weapon") || isDead) return;
+        if (!collision.CompareTag("Skill") || isDead) return;
+        StartCoroutine(KnockBack());
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Skill") || isDead) return;
         StartCoroutine(KnockBack());
     }
 
@@ -72,8 +89,9 @@ public class EnemyController : MonoBehaviour
         int calculateDamage = Mathf.Max(damage, 1); // 방어력 만큼 깍아야함
         health -= calculateDamage;
         rigid.AddForce((rigid.position - target.position).normalized * (force * 200f));
-        //FloatDamageText(calculateDamage);
 
+        // 피격 데미지 띄우기
+        CreateFloatingNumber(calculateDamage);
 
         OnDead();
     }
@@ -84,8 +102,8 @@ public class EnemyController : MonoBehaviour
         {
             isDead = true;
             health = 0;
-            gameObject.SetActive(false);
             SpawnExp();
+            gameObject.SetActive(false);
             //    Managers.Event.DropItem(_stat, transform);
             //    transform.localScale = Vector3.one;
             //    Managers.Game.Despawn(gameObject);
@@ -95,7 +113,6 @@ public class EnemyController : MonoBehaviour
     {
         GameObject _expGo = Resources.Load<GameObject>("Item/Exp");
         GameObject expGo = Instantiate(_expGo, transform.position, Quaternion.identity, null);
-        expGo.transform.position = transform.position;
         Exp_Item expPoint = expGo.GetComponent<Exp_Item>();
         expPoint._exp = exp;
         expPoint._expMul = 1;
@@ -115,4 +132,33 @@ public class EnemyController : MonoBehaviour
         Vector3 dirVec = (GameManager.Instance.player.transform.position - transform.position).normalized;
         rigid.AddForce((-1) * dirVec * 3, ForceMode2D.Impulse);
     }
+
+    private void CreateFloatingNumber(int damage)
+    {
+        TMP_Text floatingText = Instantiate(damagedText, transform.position, Quaternion.identity); 
+
+        floatingText.text = damage.ToString();
+        Debug.Log(damage);
+        //StartCoroutine(MoveAndFadeOut(floatingText));
+    }
+
+    //private IEnumerator MoveAndFadeOut(TMP_Text floatingText)
+    //{
+    //    Vector3 startPosition = floatingText.transform.position;
+    //    Vector3 targetPosition = startPosition + Vector3.up;
+
+    //    float elapsedTime = 0f;
+
+    //    while (elapsedTime < lifeTime)
+    //    {
+    //        floatingText.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / lifeTime);
+    //        elapsedTime += Time.deltaTime;
+
+    //        floatingText.color = new Color(floatingText.color.r, floatingText.color.g, floatingText.color.b, 1f - (elapsedTime / lifeTime));
+
+    //        yield return null;
+    //    }
+
+    //    Destroy(floatingText.gameObject);
+    //}
 }
