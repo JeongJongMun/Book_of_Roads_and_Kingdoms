@@ -19,9 +19,17 @@ public class GameManager : MonoBehaviour
         {"Born", 0}
     };
 
+    public static float GameTime { get; set; } = 0;
+    public static bool gameStop = false;
+
     private void Awake()
     {
         Instance = this;
+    }
+    private void Update()
+    {
+        GameTime += Time.deltaTime;
+
     }
 
     public void WeaponLevel(string weaponName)
@@ -41,5 +49,9 @@ public class GameManager : MonoBehaviour
     {
         isLive = true;
         Time.timeScale = 1;
+    }
+    public void GameOver()
+    {
+        Debug.Log("게임 오버");
     }
 }
