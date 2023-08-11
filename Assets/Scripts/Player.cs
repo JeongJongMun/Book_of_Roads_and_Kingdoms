@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    [Header("조이스틱 객체")]
+    public VariableJoystick joystick;
+
+    [Header("Ground의 다음 위치")]
     public Vector3 nextPos;
 
+    [Header("이동 속도")]
     public float moveSpeed;
     public float hitTime;
     public Scaner scaner;
@@ -22,11 +28,6 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
     }
-    void Start()
-    {
-
-    }
-
 
     void Update()
     {
@@ -62,10 +63,10 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        float xAxis = Input.GetAxisRaw("Horizontal");
-        float yAxis = Input.GetAxisRaw("Vertical");
-        Debug.Log(xAxis);
+        float xAxis = joystick.Horizontal;
+        float yAxis = joystick.Vertical;
 
+        // Ground의 다음 위치 설정
         nextPos = new Vector3(xAxis, yAxis, 0);
 
         Vector2 moveVec = new Vector2(xAxis,yAxis).normalized * moveSpeed * Time.fixedDeltaTime;
