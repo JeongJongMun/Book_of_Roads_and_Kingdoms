@@ -63,8 +63,8 @@ public class Enemy : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Bullet") || isDead) return;
-        //StartCoroutine(KnockBack());
-        //health -= collision.GetComponent<Bullet>().damage;
+        StartCoroutine(KnockBack());
+        health -= collision.GetComponent<Bullet>().damage;
 
         if (health > 0)
         {

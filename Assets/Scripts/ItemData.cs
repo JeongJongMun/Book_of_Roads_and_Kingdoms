@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemData : MonoBehaviour
+[CreateAssetMenu(fileName = "Item", menuName = "Scriptble Object/ItemData")]
+public class ItemData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public enum ItemType { FireBall, Bone }
+    public ItemType itemType;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int itemId;
+    public string itemName;
+    [TextArea]
+    public string initItemDesc;
+    [TextArea]
+    public string itemDesc;
+    public Sprite itemIcon;
+
+    [Header("# Level Data")]
+    public float baseDamage;
+    public float baseSpeed;
+    public int baseCount;
+    public float[] damages;
+    public int[] counts;
+
+    [Header("# Weapon")]
+    public GameObject projectile;
+    public Sprite hand;
 }

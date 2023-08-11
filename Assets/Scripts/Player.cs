@@ -63,8 +63,12 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        float xAxis = joystick.Horizontal;
-        float yAxis = joystick.Vertical;
+        //float xAxis = joystick.Horizontal;
+        //float yAxis = joystick.Vertical;
+
+        float xAxis = Input.GetAxisRaw("Horizontal");
+        float yAxis = Input.GetAxisRaw("Vertical");
+
 
         // Ground의 다음 위치 설정
         nextPos = new Vector3(xAxis, yAxis, 0);

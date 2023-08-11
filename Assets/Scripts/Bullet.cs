@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public int bulletid; 
     public float damage;
-    public int per;
+    public int count;
     public float bulletSpeed;
 
     Rigidbody2D rigid;
@@ -14,26 +15,21 @@ public class Bullet : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
     }
-    public void Init(float _damage, int _per, Vector3 dir)
-    {
-        damage = _damage;
-        per = _per;
 
-        if (per >= 0)
-        {
-            rigid.velocity = dir * bulletSpeed;
-        }
+    void Start()
+    {
+        rigid.velocity = bulletSpeed * Vector2.right;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy") || per == -100)
+        if (!collision.CompareTag("Enemy") || count == -100)
         {
             return;
         }
 
-        per--;
-        if (per < 0)
+        count--;
+        if (count < 0)
         {
             rigid.velocity = Vector2.zero;
             gameObject.SetActive(false);
@@ -42,7 +38,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Area") || per == -100) return;
+        if (!collision.CompareTag("Area") || count == -100) return;
 
         gameObject.SetActive(false);
     }
