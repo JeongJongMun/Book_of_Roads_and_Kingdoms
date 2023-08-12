@@ -320,6 +320,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 382413092}
     - target: {fileID: 8095742531515808317, guid: 966d12b1479e9a5469c8447f15dda2c5, type: 3}
+      propertyPath: losePanel
+      value: 
+      objectReference: {fileID: 953442721}
+    - target: {fileID: 8095742531515808317, guid: 966d12b1479e9a5469c8447f15dda2c5, type: 3}
       propertyPath: exp_slider
       value: 
       objectReference: {fileID: 1143350021}
@@ -360,6 +364,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 966d12b1479e9a5469c8447f15dda2c5, type: 3}
+<<<<<<< Updated upstream
+=======
+--- !u!1 &953442721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7185362361446894252, guid: 966d12b1479e9a5469c8447f15dda2c5, type: 3}
+  m_PrefabInstance: {fileID: 953442720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1061843054 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1701622610734808660, guid: e305491e640bd2548b49230b20fc7eb3, type: 3}
+  m_PrefabInstance: {fileID: 2361020165914364800}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1 &1084810958
 GameObject:
   m_ObjectHideFlags: 0

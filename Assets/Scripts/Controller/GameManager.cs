@@ -250,6 +250,62 @@ public class GameManager : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    public void ShowText()
+    {
+        textPanel.SetActive(true);
+        textPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "조각을 " + itemNum + "개 획득했다.";
+        isShowText = true;
+        //Time.timeScale = 0;
+    }
+
+    public void HideText()
+    {
+        if (Input.GetButtonDown("Jump") && isShowText)
+        {
+            textPanel.SetActive(false);
+            //Time.timeScale = 1;
+            isShowText = false;
+        }
+    }
+
+    public void ShowQuestText()
+    {
+        if (stage == 0)
+        {
+            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "몬스터를 잡아 유물조각을 수집하라! (" + questItem + "/3";
+        }
+        else if (stage == 1)
+        {
+            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "카바 주변을 3바퀴 돌아라! (" + rotateNum + "/3";
+            if(rotateNum == 3)
+            {
+                foreach(GameObject item in items)
+                {
+                    try
+                    {
+                        item.SetActive(true);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "맵을 탐색하여 유물조각을 수집하라! (" + itemNum + "/3";
+            }
+        }
+    }
+
+    public void ShowMap()
+    {
+        if (itemNum == 3 || questItem >= 3)
+        {
+            //isBossPhase = true;
+            map.SetActive(true);
+        }
+    }
+>>>>>>> Stashed changes
     public void NextStage() //버튼
     {
         AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);

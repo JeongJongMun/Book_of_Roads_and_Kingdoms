@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
 
 
     public enum Bgm { Menu, Mekka, Jerusalem }
-    public enum Sfx { bone, fireballSpell, fireballCrack, LevelUp, Sanshir, StageFail, UiButton}
+    public enum Sfx { bone, fireballSpell, fireballCrack, LevelUp, Sanshir, StageFail, UiButton, Walk}
 
     void Awake()
     {
