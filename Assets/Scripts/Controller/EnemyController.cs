@@ -114,15 +114,11 @@ public class EnemyController : MonoBehaviour
             int ran = Random.Range(0, 100);
             if(ran < 50 && GameManager.Instance.stage == 0)
             {
-                GameManager.Instance.questItem++;
-                if(GameManager.Instance.questItem == 3)
-                {
-                    GameManager.Instance.isBossPhase = true;
-                }
             }
             health = 0;
             SpawnExp();
             gameObject.SetActive(false);
+            GameManager.Instance.questPanel.GetComponent<QuestController>().goalKill--;
             //    Managers.Event.DropItem(_stat, transform);
             //    transform.localScale = Vector3.one;
             //    Managers.Game.Despawn(gameObject);

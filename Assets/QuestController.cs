@@ -25,9 +25,9 @@ public class QuestController : MonoBehaviour
 
     public void CheckSuccess()
     {
-        if (goalKill < 0)
+        if (goalKill < 400)
         {
-
+            text1.text = goalKill + "/500";
         }
     }
 }

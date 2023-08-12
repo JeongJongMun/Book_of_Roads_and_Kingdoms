@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     [Header("플레이 시간")]
     public int playTime;
 
-    //public float health;
     public bool isLive;
     public int stage;
 
@@ -47,25 +46,15 @@ public class GameManager : MonoBehaviour
     public float surviveTime;
     public float restTime;
 
-    public TMP_Text timerText;
-
-    [Header("오브젝트 수집")]
-    public GameObject[] items; //stage 0 몬스터 드랍템
-    public int questItem; //stage 0 몬스터 드랍템
-    public bool isShowText;
+    [Header("클리어 시 나오는 지도")]
     public GameObject map;
-    public GameObject textPanel;
-    public int itemNum;//stage 1 수집템
 
-    [Header("카바회전")]
-    public int rotateNum;//stage 1 회전수
-    public bool[] checkWayPoints;
 
     [Header("퀘스트 판넬")]
     public GameObject questPanel;
 
     [Header("Lose 판넬")]
-    public GameObject losePanel;
+    //public GameObject losePanel;
 
 
     [Header("현재 스킬 레벨")]
@@ -101,38 +90,27 @@ public class GameManager : MonoBehaviour
     {
         GameTime += Time.deltaTime;
         SetExpAndLevel();
-        ShowQuestText();
+        //ShowQuestText();
         if(isBossPhase)
         {
             questPanel.SetActive(false);
         }
-        if(SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            if (checkWayPoints[3])
-            {
-                rotateNum++;
-                for (int i = 0; i < 4; i++)
-                {
-                    checkWayPoints[i] = false;
-                }
-            }
-        }
     }
 
-    void LateUpdate()
-    {
-        timerText.gameObject.SetActive(isBossPhase);
-        if(isBossPhase)
-            surviveTime -= Time.deltaTime;
-        timerText.text = string.Format("{0:D2}:{1:D2}", (int)surviveTime / 60, (int)surviveTime % 60);
-        // 290   04:50
-        if (surviveTime < 0)
-        {
-            isBossPhase = false;
-            GameOver(true);
-        }
+    //void LateUpdate()
+    //{
+    //    timerText.gameObject.SetActive(isBossPhase);
+    //    if(isBossPhase)
+    //        surviveTime -= Time.deltaTime;
+    //    timerText.text = string.Format("{0:D2}:{1:D2}", (int)surviveTime / 60, (int)surviveTime % 60);
+    //    // 290   04:50
+    //    if (surviveTime < 0)
+    //    {
+    //        isBossPhase = false;
+    //        GameOver(true);
+    //    }
 
-    }
+    //}
     private void Start()
     {
         // 게임 시작 시 스킬 하나 고름
@@ -152,13 +130,9 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver(bool isWin)
     {
-        if(isWin)
+        if (isWin)
         {
-            ShowMap();
-        }
-        else
-        {
-            losePanel.SetActive(true);
+            //ShowMap();
         }
     }
 
@@ -276,60 +250,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    public void ShowText()
-    {
-        textPanel.SetActive(true);
-        textPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "조각을 " + itemNum + "개 획득했다.";
-        isShowText = true;
-        //Time.timeScale = 0;
-    }
-
-    public void HideText()
-    {
-        if (Input.GetButtonDown("Jump") && isShowText)
-        {
-            textPanel.SetActive(false);
-            //Time.timeScale = 1;
-            isShowText = false;
-        }
-    }
-
-    public void ShowQuestText()
-    {
-        if (stage == 0)
-        {
-            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "몬스터를 잡아 유물조각을 수집하라! (" + questItem + "/3";
-        }
-        else if (stage == 1)
-        {
-            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "카바 주변을 3바퀴 돌아라! (" + rotateNum + "/3";
-            if(rotateNum == 3)
-            {
-                foreach(GameObject item in items)
-                {
-                    try
-                    {
-                        item.SetActive(true);
-                    }
-                    catch
-                    {
-
-                    }
-                }
-                questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "맵을 탐색하여 유물조각을 수집하라! (" + itemNum + "/3";
-            }
-        }
-    }
-
-    public void ShowMap()
-    {
-        if (itemNum == 3 || questItem >= 3)
-        {
-            //isBossPhase = true;
-            map.SetActive(true);
-        }
-    }
     public void NextStage() //버튼
     {
         AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);

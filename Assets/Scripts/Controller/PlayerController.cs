@@ -34,20 +34,13 @@ public class PlayerController : BaseController
         _anim = GetComponent<Animator>();
         _type = Define.WorldObject.Player;
     }
-    void Update()
-    {
-        GameManager.Instance.HideText();
-        ScanItem();
-    }
+
     private void FixedUpdate()
     {
         Move();
     }
     void Move()
     {
-        if (GameManager.Instance.isShowText)
-            return;
-
         float xAxis = joystick.Horizontal;
         float yAxis = joystick.Vertical;
 
@@ -130,46 +123,6 @@ public class PlayerController : BaseController
         //}
 
     }
-
-    public void ScanItem()
-    {
-        hit = Physics2D.CircleCast(transform.position, 2, Vector2.zero,0,LayerMask.GetMask("CollectableItem"));
-        if(hit.collider != null)
-            scanObj = hit.collider.gameObject;
-
-        if (Input.GetButtonDown("Jump") && scanObj != null)
-        {
-            GameManager.Instance.itemNum++;
-            if (GameManager.Instance.itemNum == 3 || GameManager.Instance.stage == 1)
-            {
-                GameManager.Instance.isBossPhase = true;
-                //map.SetActive(true);
-            }
-            GameManager.Instance.ShowText();
-            Destroy(scanObj);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "wayPoint0")
-        {
-            GameManager.Instance.checkWayPoints[0] = true;
-        }
-        if (collision.gameObject.tag == "wayPoint1" && GameManager.Instance.checkWayPoints[0])
-        {
-            GameManager.Instance.checkWayPoints[1] = true;
-        }
-        if (collision.gameObject.tag == "wayPoint2" && GameManager.Instance.checkWayPoints[1])
-        {
-            GameManager.Instance.checkWayPoints[2] = true;
-        }
-        if (collision.gameObject.tag == "wayPoint3" && GameManager.Instance.checkWayPoints[2])
-        {
-            GameManager.Instance.checkWayPoints[3] = true;
-        }
-    }
-
 
 
     IEnumerator KnockBack()
