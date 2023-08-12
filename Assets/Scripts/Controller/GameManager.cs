@@ -65,7 +65,8 @@ public class GameManager : MonoBehaviour
     public GameObject losePanel;
 
 
-    public Dictionary<Define.Skills, int> weaponLevel = new Dictionary<Define.Skills, int>()
+    [Header("현재 스킬 레벨")]
+    public Dictionary<Define.Skills, int> skillLevel = new Dictionary<Define.Skills, int>()
     {
         {Define.Skills.Born, 0},
         {Define.Skills.Candle , 0},
@@ -81,6 +82,12 @@ public class GameManager : MonoBehaviour
         {Define.Skills.Shield , 0},
         {Define.Skills.Armor , 0},
     };
+
+    [Header("보유 스킬")]
+    public List<SkillController> skillControllers = new List<SkillController>();
+
+    [Header("스킬 레벨 정보")]
+    public WeaponStats weaponStats;
 
     public static float GameTime { get; set; } = 0;
     public static bool gameStop = false;
@@ -181,25 +188,32 @@ public class GameManager : MonoBehaviour
     }
     public void GetOrSetSkill(Define.Skills weaponName)
     {
-        Debug.LogFormat("{0} Level {1} -> {2}", weaponName.ToString(), weaponLevel[weaponName], weaponLevel[weaponName]+1);
-        weaponLevel[weaponName]++;
-        if (weaponLevel[weaponName] == 1)
+        Debug.LogFormat("{0} Level {1} -> {2}", weaponName.ToString(), skillLevel[weaponName], skillLevel[weaponName]+1);
+
+        // 스킬 레벨 업
+        skillLevel[weaponName]++;
+
+        if (skillLevel[weaponName] == 1)
         {
             GameObject _skill = Resources.Load<GameObject>("Skills/" + weaponName.ToString());
             // 스킬 생성
             Instantiate(_skill, skillParent.transform);
+            // 스킬을 보유 스킬에 추가
+            if (!skillControllers.Contains(_skill.GetComponent<SkillController>())) 
+            {
+                skillControllers.Add(_skill.GetComponent<SkillController>());
+            }
             // 스킬을 설정창에 표시
             foreach (GameObject skill in skillList)
             {
                 if (!skill.activeSelf)
                 {
                     skill.SetActive(true);
-                    skill.transform.GetChild(0).GetComponent<TMP_Text>().text = weaponName.ToString() + "\n" + "Lv " + weaponLevel[weaponName];
+                    skill.transform.GetChild(0).GetComponent<TMP_Text>().text = weaponName.ToString() + "\n" + "Lv " + skillLevel[weaponName];
                     break;
                 }
             }
         }
-
     }
 
 

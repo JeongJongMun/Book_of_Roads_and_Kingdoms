@@ -10,6 +10,9 @@ public class PlayerController : BaseController
     [Header("Ground의 다음 위치")]
     public Vector3 nextPos;
 
+    [Header("플레이어 움직임 여부")]
+    public bool isWalking;
+
     public float hitTime;
     public Scaner scaner;
     public bool isHit;
@@ -48,10 +51,15 @@ public class PlayerController : BaseController
         float yAxis = Input.GetAxisRaw("Vertical");
         if (xAxis != 0 || yAxis != 0)
         {
-            _anim.SetBool("isWalking", true);
+            isWalking = true;
+            _anim.SetBool("isWalking", isWalking);
         }
-        else _anim.SetBool("isWalking", false);
-        
+        else
+        {
+            isWalking = false;
+            _anim.SetBool("isWalking", isWalking);
+        }
+
         // Ground의 다음 위치 설정
         nextPos = new Vector3(xAxis, yAxis, 0);
 

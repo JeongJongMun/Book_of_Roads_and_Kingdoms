@@ -45,10 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 0
-  _damage: 1
+  _damage: 10
   _speed: 7
   _level: 1
-  _force: 1
-  _penetrate: 1
   _countPerCreate: 1
-  _cooldown: 1
+  _cooldown: 2

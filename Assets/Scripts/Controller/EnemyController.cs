@@ -94,13 +94,12 @@ public class EnemyController : MonoBehaviour
         StartCoroutine(KnockBack());
     }
 
-    public void OnDamaged(int damage, float force = 0)
+    public void OnDamaged(int damage)
     {
         //Managers.Event.PlayHitEnemyEffectSound();
         //_anime.SetTrigger("Hit");
         int calculateDamage = Mathf.Max(damage, 1); // 방어력 만큼 깍아야함
         health -= calculateDamage;
-        rigid.AddForce((rigid.position - target.position).normalized * (force * 200f));
 
         // 피격 데미지 띄우기
         CreateFloatingNumber(calculateDamage);
