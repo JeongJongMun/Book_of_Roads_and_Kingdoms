@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     SpriteRenderer spriter;
     WaitForFixedUpdate wait;
     Collider2D coll;
+    Animator animator;
 
     [Header("피격 데미지 텍스트")]
     public TMP_Text damagedText;
@@ -32,6 +33,7 @@ public class EnemyController : MonoBehaviour
         spriter = GetComponent<SpriteRenderer>();
         wait = new WaitForFixedUpdate();
         coll = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -103,6 +105,7 @@ public class EnemyController : MonoBehaviour
 
         // 피격 데미지 띄우기
         CreateFloatingNumber(calculateDamage);
+        animator.SetTrigger("doHit");
 
         OnDead();
     }

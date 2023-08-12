@@ -12,7 +12,14 @@ public class MapControl : MonoBehaviour
 
     void Awake()
     {
+        try
+        {
             GetComponent<Animator>().SetTrigger("isOpened");
+        }
+        catch
+        {
+
+        }
     }
 
     // Update is called once per frame
@@ -23,10 +30,8 @@ public class MapControl : MonoBehaviour
 
     public void goStage(int stage)
     {
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
+        //AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
         Debug.Log("z");
-        if (stage == 2)
-            return;
         SceneManager.LoadScene(stage);
 
     }
