@@ -101,12 +101,7 @@ MonoBehaviour:
   dirVec: {x: 1, y: 0, z: 0}
   damage: 5
   speed: 10
-  force: 1
-  size: 1
-  panatrate: 1
-  rotationSpeed: 100
-  lifeTime: 2
-  createTime: 0
+  rotationSpeed: 150
 --- !u!70 &5887449481874094682
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

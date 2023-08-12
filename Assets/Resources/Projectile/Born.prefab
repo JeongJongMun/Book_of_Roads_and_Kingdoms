@@ -101,7 +101,7 @@ MonoBehaviour:
   dirVec: {x: 1, y: 0, z: 0}
   damage: 10
   speed: 3
-  rotationSpeed: 50
+  rotationSpeed: 200
 --- !u!60 &8457769285111978293
 PolygonCollider2D:
   m_ObjectHideFlags: 0

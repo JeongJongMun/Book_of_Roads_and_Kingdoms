@@ -9,7 +9,11 @@ public class KoranController : SkillController
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyController>().OnDamaged(_damage);
+            if (other.GetComponent<EnemyController>().koranTerm <= 0f)
+            {
+                other.GetComponent<EnemyController>().OnDamaged(_damage);
+                other.GetComponent<EnemyController>().koranTerm = 0.5f;
+            }
         }
     }
 }

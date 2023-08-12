@@ -13,6 +13,6 @@ public class Explosion : MonoBehaviour
     }
     private void Start()
     {
-        Destroy(gameObject, 3.0f);
+        Destroy(gameObject, 0.5f);
     }
 }

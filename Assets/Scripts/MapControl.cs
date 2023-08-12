@@ -35,4 +35,8 @@ public class MapControl : MonoBehaviour
         SceneManager.LoadScene(stage);
 
     }
+    public void OnClickYeah()
+    {
+        SceneManager.LoadScene("Phase2(Clear)");
+    }
 }

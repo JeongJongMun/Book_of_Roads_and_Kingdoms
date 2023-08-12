@@ -15,8 +15,7 @@ public class Born : Projectile
 
     public override void OnMove()
     {
-        float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
         transform.position += dirVec * (speed * Time.fixedDeltaTime);
     }
 }

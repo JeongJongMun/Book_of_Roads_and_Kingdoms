@@ -232,10 +232,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8555013664045112156, guid: 50437176ce6b2774588b1ea2d1cf6fce, type: 3}
-      propertyPath: _Movespeed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8948438854419803218, guid: 50437176ce6b2774588b1ea2d1cf6fce, type: 3}
       propertyPath: m_Name
       value: Player

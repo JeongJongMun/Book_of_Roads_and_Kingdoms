@@ -976,7 +976,7 @@ MonoBehaviour:
   _level: 1
   _hp: 50
   _maxHp: 50
-  _Movespeed: 4
+  _Movespeed: 5
   _damage: 0
   _defense: 0
 --- !u!1 &8964281604589230945
