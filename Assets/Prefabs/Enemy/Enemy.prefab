@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3140313693536843992}
   - component: {fileID: 3398182191069951516}
-  - component: {fileID: 4775817666435904629}
-  - component: {fileID: -8363443398811431389}
   - component: {fileID: 6239220985055268405}
   - component: {fileID: 2538482286035667454}
+  - component: {fileID: 4775817666435904629}
+  - component: {fileID: -8363443398811431389}
   - component: {fileID: 1383064223666706631}
   m_Layer: 6
   m_Name: Enemy
@@ -89,40 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4775817666435904629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4121785511971147007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1beedefd3585bad418b9e2fe73e2373a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  health: 0
-  maxHealth: 0
-  damage: 0
-  exp: 0
-  isDead: 0
-  target: {fileID: 0}
-  damagedText: {fileID: -9180108364502706584, guid: 7d9ac19910f30d24f9b84fd8214cbf84, type: 3}
-  textSpeed: 3
-  lifeTime: 3
---- !u!114 &-8363443398811431389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4121785511971147007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90c252b42927f0d4e8aa3c161f455d6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &6239220985055268405
 Rigidbody2D:
   serializedVersion: 4
@@ -195,6 +161,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &4775817666435904629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4121785511971147007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1beedefd3585bad418b9e2fe73e2373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  health: 0
+  maxHealth: 0
+  damage: 0
+  exp: 0
+  isDead: 0
+  isBoss: 0
+  target: {fileID: 0}
+  damagedText: {fileID: -9180108364502706584, guid: 7d9ac19910f30d24f9b84fd8214cbf84, type: 3}
+  textSpeed: 3
+  lifeTime: 3
+--- !u!114 &-8363443398811431389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4121785511971147007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c252b42927f0d4e8aa3c161f455d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1383064223666706631
 Animator:
   serializedVersion: 5

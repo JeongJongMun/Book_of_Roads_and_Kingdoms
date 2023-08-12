@@ -158,7 +158,7 @@ public class PlayerStat : Stat
         Level = 1;
         HP = 50;
         MaxHP = 50;
-        MoveSpeed = 10.0f;
+        MoveSpeed = 6.0f;
         Damage = 1;
         Defense = 0;
         Cooldown = 0;

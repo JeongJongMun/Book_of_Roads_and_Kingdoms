@@ -17,6 +17,6 @@ MonoBehaviour:
   hp: 20
   damage: 10
   exp: 5
-  speed: 5
+  speed: 4
   delay: 0
   spawnTransNum: 0

@@ -33,6 +33,10 @@ public class EnemyController : MonoBehaviour
         wait = new WaitForFixedUpdate();
         coll = GetComponent<Collider2D>();
     }
+    private void Start()
+    {
+        
+    }
 
     void FixedUpdate()
     {

@@ -47,8 +47,10 @@ public class PlayerController : BaseController
     {
         if (GameManager.Instance.isShowText)
             return;
-        float xAxis = Input.GetAxisRaw("Horizontal");
-        float yAxis = Input.GetAxisRaw("Vertical");
+
+        float xAxis = joystick.Horizontal;
+        float yAxis = joystick.Vertical;
+
         if (xAxis != 0 || yAxis != 0)
         {
             isWalking = true;

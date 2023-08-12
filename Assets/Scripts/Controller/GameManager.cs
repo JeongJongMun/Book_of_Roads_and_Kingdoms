@@ -345,4 +345,9 @@ public class GameManager : MonoBehaviour
     {
         settingPanel.SetActive(!settingPanel.activeSelf);
     }
+    // 나가기 버튼
+    public void OnClickExitBtn()
+    {
+        SceneManager.LoadScene("Main");
+    }
 }
