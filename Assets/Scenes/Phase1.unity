@@ -2562,7 +2562,7 @@ MonoBehaviour:
   _level: 1
   _hp: 50
   _maxHp: 50
-  _Movespeed: 10
+  _Movespeed: 8
   _damage: 0
   _defense: 0
 --- !u!70 &382413094
@@ -16346,11 +16346,14 @@ MonoBehaviour:
   surviveTime: 5
   restTime: 0
   timerText: {fileID: 1900093185}
+  items: []
   questItem: 0
   isShowText: 0
   map: {fileID: 1733076503}
   textPanel: {fileID: 1623952619}
   itemNum: 0
+  rotateNum: 0
+  checkWayPoints: 
   questPanel: {fileID: 585852333}
   losePanel: {fileID: 1700789497}
 --- !u!4 &1700789499

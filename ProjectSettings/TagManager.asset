@@ -10,6 +10,10 @@ TagManager:
   - Bullet
   - CollectableItem
   - Skill
+  - wayPoint0
+  - wayPoint1
+  - wayPoint2
+  - wayPoint3
   layers:
   - Default
   - TransparentFX

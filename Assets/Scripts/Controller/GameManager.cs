@@ -47,11 +47,16 @@ public class GameManager : MonoBehaviour
     public TMP_Text timerText;
 
     [Header("오브젝트 수집")]
+    public GameObject[] items; //stage 0 몬스터 드랍템
     public int questItem; //stage 0 몬스터 드랍템
     public bool isShowText;
     public GameObject map;
     public GameObject textPanel;
     public int itemNum;//stage 1 수집템
+
+    [Header("카바회전")]
+    public int rotateNum;//stage 1 회전수
+    public bool[] checkWayPoints;
 
     [Header("퀘스트 판넬")]
     public GameObject questPanel;
@@ -82,32 +87,27 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        Instance = this;
 
     }
     private void Update()
     {
         GameTime += Time.deltaTime;
         SetExpAndLevel();
-        if (stage == 0)
-        {
-            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "몬스터를 잡아 유물조각을 수집하라! (" + questItem + "/3";
-        }
-        else if(stage == 1)
-        {
-            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "맵을 탐색하여 유물조각을 수집하라! (" + itemNum + "/3";
-        }
+        RotateCheck();
+        ShowQuestText();
         if(isBossPhase)
         {
             questPanel.SetActive(false);
+        }
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        if (checkWayPoints[3])
+        {
+            rotateNum++;
+            for(int i = 0; i < 4; i++)
+            {
+                checkWayPoints[i] = false;
+            }
         }
     }
 
@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
 
     public void ReStart() //LosePanel에 넣을거
     {
-        SceneManager.LoadScene(stage);
+        SceneManager.LoadScene(0);
     }
 
     public void LevelUpEvent()
@@ -220,6 +220,39 @@ public class GameManager : MonoBehaviour
             isShowText = false;
         }
     }
+
+    public void ShowQuestText()
+    {
+        if (stage == 0)
+        {
+            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "몬스터를 잡아 유물조각을 수집하라! (" + questItem + "/3";
+        }
+        else if (stage == 1)
+        {
+            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "카바 주변을 3바퀴 돌아라! (" + rotateNum + "/3";
+            if(rotateNum == 3)
+            {
+                foreach(GameObject item in items)
+                {
+                    try
+                    {
+                        item.SetActive(true);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "맵을 탐색하여 유물조각을 수집하라! (" + itemNum + "/3";
+            }
+        }
+    }
+
+
+    void RotateCheck() //2페이즈퀘스트
+    {
+        
+    }
     public void ShowMap()
     {
         if (itemNum == 3 || questItem >= 3)
@@ -230,8 +263,7 @@ public class GameManager : MonoBehaviour
     }
     public void NextStage() //버튼
     {
-        stage++;
-        SceneManager.LoadScene(stage);
+        SceneManager.LoadScene(stage+1);
     }
 
     // 설정 버튼

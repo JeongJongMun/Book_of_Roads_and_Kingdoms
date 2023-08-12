@@ -63,12 +63,14 @@ public class PlayerController : BaseController
         }
     }
 
+
     void OnCollisionStay2D(Collision2D collision)
     {
         if (isHit) return;
         if (!GameManager.Instance.isLive) return;
         if (collision.gameObject.tag == "Enemy")
         {
+            StartCoroutine(KnockBack());
             _stat.HP -= (int)collision.gameObject.GetComponent<EnemyController>().damage;
             if (_stat.HP <= 0)
             {
@@ -127,5 +129,33 @@ public class PlayerController : BaseController
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "wayPoint0")
+        {
+            GameManager.Instance.checkWayPoints[0] = true;
+        }
+        if (collision.gameObject.tag == "wayPoint1" && GameManager.Instance.checkWayPoints[0])
+        {
+            GameManager.Instance.checkWayPoints[1] = true;
+        }
+        if (collision.gameObject.tag == "wayPoint2" && GameManager.Instance.checkWayPoints[1])
+        {
+            GameManager.Instance.checkWayPoints[2] = true;
+        }
+        if (collision.gameObject.tag == "wayPoint3" && GameManager.Instance.checkWayPoints[2])
+        {
+            GameManager.Instance.checkWayPoints[3] = true;
+        }
+    }
 
+
+
+    IEnumerator KnockBack()
+    {
+        
+        yield return null;
+        Vector3 dirVec = (GameManager.Instance.player.transform.position - transform.position).normalized;
+        _rigid.AddForce(dirVec * 10, ForceMode2D.Impulse);
+    }
 }
