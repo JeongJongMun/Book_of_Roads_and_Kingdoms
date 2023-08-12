@@ -7,6 +7,7 @@ public class MainManager : MonoBehaviour
 
     public void OnClickStartBtn()
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
         nextStageGroup.SetActive(true);
     }
 }

@@ -30,6 +30,7 @@ public class Fireball : Projectile
         //Managers.Sound.Play("Explosion_02");
         GameObject _explosion = Resources.Load<GameObject>("Projectile/Explosion");
         Instantiate(_explosion, transform.position, Quaternion.identity, null);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.fireballCrack);
         Destroy(gameObject);
     }
 }

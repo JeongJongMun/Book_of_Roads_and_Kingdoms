@@ -164,6 +164,7 @@ public class GameManager : MonoBehaviour
 
     public void ReStart() //LosePanel에 넣을거
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
         SceneManager.LoadScene(0);
     }
 
@@ -171,6 +172,9 @@ public class GameManager : MonoBehaviour
     {
         // 스킬 선택창 보여주기
         skillSelectPanel.SetActive(true);
+
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
+
         // 랜덤 스킬 3개 보여주기
         skillSelectPanel.GetComponent<SkillSelect>().RandomShow();
         Stop();
@@ -191,7 +195,7 @@ public class GameManager : MonoBehaviour
     {
         // 스킬 레벨 업
         skillLevel[weaponName]++;
-
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
         if (skillLevel[weaponName] == 1)
         {
             GameObject _skill = Resources.Load<GameObject>("Skills/" + weaponName.ToString());
@@ -328,6 +332,7 @@ public class GameManager : MonoBehaviour
     }
     public void NextStage() //버튼
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
         SceneManager.LoadScene(stage+1);
     }
 

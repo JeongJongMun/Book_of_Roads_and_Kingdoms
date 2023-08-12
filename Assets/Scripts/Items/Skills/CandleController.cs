@@ -25,6 +25,7 @@ public class CandleController : SkillController
         {
             GameObject _go = Resources.Load<GameObject>("Projectile/Fireball");
             GameObject go = Instantiate(_go, transform.position, Quaternion.identity, null);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.fireballSpell);
 
             SetWeapon(go, angle);
             if (i == _countPerCreate - 1)

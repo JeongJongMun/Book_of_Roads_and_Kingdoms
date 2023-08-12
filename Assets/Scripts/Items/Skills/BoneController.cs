@@ -24,6 +24,7 @@ public class BoneController : SkillController
         {
             GameObject _go = Resources.Load<GameObject>("Projectile/Born");
             GameObject go = Instantiate(_go, transform.position, Quaternion.identity, null);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.bone);
             SetWeapon(go, angle);
             if (i == _countPerCreate - 1)
                 break;

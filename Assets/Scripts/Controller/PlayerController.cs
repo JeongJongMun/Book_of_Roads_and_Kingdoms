@@ -53,8 +53,17 @@ public class PlayerController : BaseController
 
         if (xAxis != 0 || yAxis != 0)
         {
+            if (!isWalking)
+            {
+                AudioManager.instance.walkPlayer.Play();
+            }
+            else
+            {
+                AudioManager.instance.walkPlayer.Pause();
+            }
             isWalking = true;
             _anim.SetBool("isWalking", isWalking);
+
         }
         else
         {
@@ -84,8 +93,10 @@ public class PlayerController : BaseController
             _stat.HP -= (int)collision.gameObject.GetComponent<EnemyController>().damage;
             if (_stat.HP <= 0)
             {
+               
                 //animator.SetTrigger("dead");
                 GameManager.Instance.GameOver(false);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.StageFail);
                 //GameManager.Instance.Stop();
                 return;
             }

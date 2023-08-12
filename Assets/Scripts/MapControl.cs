@@ -23,6 +23,8 @@ public class MapControl : MonoBehaviour
 
     public void goStage(int stage)
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
+        Debug.Log("z");
         if (stage == 2)
             return;
         SceneManager.LoadScene(stage);
