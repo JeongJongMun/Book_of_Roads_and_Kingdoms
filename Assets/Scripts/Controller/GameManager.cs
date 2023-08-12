@@ -39,6 +39,27 @@ public class GameManager : MonoBehaviour
     [Header("설정창 스킬 목록")]
     public GameObject[] skillList;
 
+    [Header("보스전")]
+    public bool isBossPhase;
+    public float surviveTime;
+    public float restTime;
+
+    public TMP_Text timerText;
+
+    [Header("오브젝트 수집")]
+    public int questItem; //stage 0 몬스터 드랍템
+    public bool isShowText;
+    public GameObject map;
+    public GameObject textPanel;
+    public int itemNum;//stage 1 수집템
+
+    [Header("퀘스트 판넬")]
+    public GameObject questPanel;
+
+    [Header("Lose 판넬")]
+    public GameObject losePanel;
+
+
     public Dictionary<Define.Skills, int> weaponLevel = new Dictionary<Define.Skills, int>()
     {
         {Define.Skills.Born, 0},
@@ -61,12 +82,48 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
     }
     private void Update()
     {
         GameTime += Time.deltaTime;
         SetExpAndLevel();
+        if (stage == 0)
+        {
+            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "몬스터를 잡아 유물조각을 수집하라! (" + questItem + "/3";
+        }
+        else if(stage == 1)
+        {
+            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "맵을 탐색하여 유물조각을 수집하라! (" + itemNum + "/3";
+        }
+        if(isBossPhase)
+        {
+            questPanel.SetActive(false);
+        }
+    }
+
+    void LateUpdate()
+    {
+        timerText.gameObject.SetActive(isBossPhase);
+        if(isBossPhase)
+            surviveTime -= Time.deltaTime;
+        timerText.text = string.Format("{0:D2}:{1:D2}", (int)surviveTime / 60, (int)surviveTime % 60);
+        // 290   04:50
+        if (surviveTime < 0)
+        {
+            isBossPhase = false;
+            GameOver(true);
+        }
+
     }
     private void Start()
     {
@@ -85,9 +142,21 @@ public class GameManager : MonoBehaviour
         isLive = true;
         Time.timeScale = 1;
     }
-    public void GameOver()
+    public void GameOver(bool isWin)
     {
-        Debug.Log("게임 오버");
+        if(isWin)
+        {
+            ShowMap();
+        }
+        else
+        {
+            losePanel.SetActive(true);
+        }
+    }
+
+    public void ReStart() //LosePanel에 넣을거
+    {
+        SceneManager.LoadScene(stage);
     }
 
     public void LevelUpEvent()
@@ -132,10 +201,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    public bool isShowText;
-    public GameObject map;
-    public GameObject textPanel;
-    public int itemNum;
+
 
     public void ShowText()
     {
@@ -156,14 +222,16 @@ public class GameManager : MonoBehaviour
     }
     public void ShowMap()
     {
-        if (itemNum == 3)
+        if (itemNum == 3 || questItem >= 3)
         {
+            //isBossPhase = true;
             map.SetActive(true);
         }
     }
     public void NextStage() //버튼
     {
-        SceneManager.LoadScene(2);
+        stage++;
+        SceneManager.LoadScene(stage);
     }
 
     // 설정 버튼

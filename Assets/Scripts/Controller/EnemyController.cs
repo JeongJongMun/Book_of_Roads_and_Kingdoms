@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public long exp;
     //public RuntimeAnimatorController[] animCon;
     public bool isDead;
+    public bool isBoss;
     public Rigidbody2D target;
     Rigidbody2D rigid;
     SpriteRenderer spriter;
@@ -36,16 +37,13 @@ public class EnemyController : MonoBehaviour
         coll = GetComponent<Collider2D>();
     }
 
-    void Update()
-    {
-    }
     void FixedUpdate()
     {
         //anim.SetBool("Dead", isDead);
         //if (isDead || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
         Vector2 dirVec = target.position - rigid.position;
         Vector2 moveVec = dirVec.normalized * speed * Time.fixedDeltaTime;
-        spriter.flipX = dirVec.x > 0 ? false : true;
+        spriter.flipX = dirVec.x > 0 ? true : false;
         rigid.MovePosition(rigid.position + moveVec);
         rigid.velocity = Vector2.zero;
     }
@@ -63,11 +61,25 @@ public class EnemyController : MonoBehaviour
     public void Init(SpawnData data)
     {
         //anim.runtimeAnimatorController = animCon[data.spriteType];
-        speed = data.speed * (GameManager.Instance.stage * 0.5f + 1);
-        maxHealth = data.health * (GameManager.Instance.stage * 0.5f + 1);
-        health = data.health * (GameManager.Instance.stage * 0.5f + 1);
-        damage = data.damage * (GameManager.Instance.stage * 0.5f + 1);
-        exp = (long)(data.exp * (GameManager.Instance.stage * 0.5f + 1));
+
+
+        if(isBoss)
+        {
+            int value = 2;
+            speed = data.speed;
+            maxHealth = data.maxHp * value;
+            health = data.hp * value;
+            damage = data.damage * value;
+            exp = (long)(data.exp) * value;
+        }
+        else
+        {
+            speed = data.speed;
+            maxHealth = data.maxHp;
+            health = data.hp;
+            damage = data.damage;
+            exp = (long)(data.exp);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -101,6 +113,15 @@ public class EnemyController : MonoBehaviour
         if (health <= 0)
         {
             isDead = true;
+            int ran = Random.Range(0, 100);
+            if(ran < 50 && GameManager.Instance.stage == 0)
+            {
+                GameManager.Instance.questItem++;
+                if(GameManager.Instance.questItem == 3)
+                {
+                    GameManager.Instance.isBossPhase = true;
+                }
+            }
             health = 0;
             SpawnExp();
             gameObject.SetActive(false);

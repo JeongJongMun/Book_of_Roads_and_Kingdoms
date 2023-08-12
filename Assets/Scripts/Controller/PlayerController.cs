@@ -33,6 +33,7 @@ public class PlayerController : BaseController
     }
     void Update()
     {
+        GameManager.Instance.HideText();
         ScanItem();
     }
     private void FixedUpdate()
@@ -41,6 +42,8 @@ public class PlayerController : BaseController
     }
     void Move()
     {
+        if (GameManager.Instance.isShowText)
+            return;
         float xAxis = Input.GetAxisRaw("Horizontal");
         float yAxis = Input.GetAxisRaw("Vertical");
         if (xAxis != 0 || yAxis != 0)
@@ -70,7 +73,7 @@ public class PlayerController : BaseController
             if (_stat.HP <= 0)
             {
                 //animator.SetTrigger("dead");
-                GameManager.Instance.GameOver();
+                GameManager.Instance.GameOver(false);
                 //GameManager.Instance.Stop();
                 return;
             }
@@ -114,6 +117,11 @@ public class PlayerController : BaseController
         if (Input.GetButtonDown("Jump") && scanObj != null)
         {
             GameManager.Instance.itemNum++;
+            if (GameManager.Instance.itemNum == 3 || GameManager.Instance.stage == 1)
+            {
+                GameManager.Instance.isBossPhase = true;
+                //map.SetActive(true);
+            }
             GameManager.Instance.ShowText();
             Destroy(scanObj);
         }
