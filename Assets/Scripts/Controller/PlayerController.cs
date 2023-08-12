@@ -79,15 +79,13 @@ public class PlayerController : BaseController
     void OnCollisionStay2D(Collision2D collision)
     {
         if (isHit) return;
-        if (!GameManager.Instance.isLive) return;
+        if (!GameManager.Instance.isWin) return;
         if (collision.gameObject.tag == "Enemy")
         {
             StartCoroutine(KnockBack());
             _stat.HP -= (int)collision.gameObject.GetComponent<EnemyController>().damage;
             if (_stat.HP <= 0)
             {
-               
-                //animator.SetTrigger("dead");
                 GameManager.Instance.GameOver(false);
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.StageFail);
                 //GameManager.Instance.Stop();

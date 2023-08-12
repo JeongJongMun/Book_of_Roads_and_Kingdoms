@@ -26,7 +26,6 @@ public abstract class SkillController : MonoBehaviour
         _player = GameManager.Instance.playerObject;
         _playerStat = GameManager.Instance.player.GetComponent<PlayerStat>();
         _weaponStatGetter = GameManager.Instance.weaponStats;
-        Debug.Log(weaponType.ToString());
         _weaponStat = _weaponStatGetter.StatInitialize(weaponType);
     }
 
@@ -34,20 +33,7 @@ public abstract class SkillController : MonoBehaviour
     {
         if (_level > 5)
             _level = 5;
-        foreach (var dict in _weaponStat)
-        {
-            foreach (var kv in dict)
-            {
-                if (dict == null)
-                {
-                    Debug.Log("dict is null");
-                }
-                Debug.LogFormat("{0} : {1}", kv.Key, kv.Value);
-            }
-        }
 
-        Debug.LogFormat("Level is {0}", _level);
-        Debug.LogFormat("Changed Damage is {0}", _weaponStat[_level - 1]["damage"]);
         _damage = _weaponStat[_level - 1]["damage"];
         _countPerCreate = _weaponStat[_level]["countPerCreate"];
 

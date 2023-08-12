@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 5
-  _damage: 5
+  _damage: 7
   _speed: 10
   _level: 1
   _countPerCreate: 3
-  _cooldown: 5
+  _cooldown: 3
   animator: {fileID: 0}

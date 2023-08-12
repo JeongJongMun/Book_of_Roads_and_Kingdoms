@@ -40,6 +40,7 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.Instance.isWin) return;
         Vector2 dirVec = target.position - rigid.position;
         Vector2 moveVec = dirVec.normalized * speed * Time.fixedDeltaTime;
         spriter.flipX = dirVec.x > 0 ? true : false;
@@ -111,17 +112,17 @@ public class EnemyController : MonoBehaviour
         if (health <= 0)
         {
             isDead = true;
-            int ran = Random.Range(0, 100);
-            if(ran < 50 && GameManager.Instance.stage == 0)
-            {
-            }
             health = 0;
             SpawnExp();
             gameObject.SetActive(false);
-            GameManager.Instance.questPanel.GetComponent<QuestController>().goalKill--;
-            //    Managers.Event.DropItem(_stat, transform);
-            //    transform.localScale = Vector3.one;
-            //    Managers.Game.Despawn(gameObject);
+            GameManager.Instance.questManager.GetComponent<QuestController>().goalKill--;
+            if (GameManager.Instance.questManager.GetComponent<QuestController>().dropcount > 0)
+            {
+                GameManager.Instance.questManager.GetComponent<QuestController>().dropcount--;
+                GameObject mask = Resources.Load<GameObject>("Item/mask" + (GameManager.Instance.questManager.GetComponent<QuestController>().count + 1));
+                Debug.Log("Item/mask" + (GameManager.Instance.questManager.GetComponent<QuestController>().count + 1));
+                Instantiate(mask, transform.position, Quaternion.identity, null);
+            }
         }
     }
     void SpawnExp()

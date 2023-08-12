@@ -18,10 +18,7 @@ public class GameManager : MonoBehaviour
     public PoolManager poolManager;
 
     [Header("플레이 시간")]
-    public int playTime;
-
-    public bool isLive;
-    public int stage;
+    public float playTime = 0;
 
     [Header("경험치 바")]
     public Slider exp_slider;
@@ -41,17 +38,17 @@ public class GameManager : MonoBehaviour
     [Header("일시정지창 스킬 목록")]
     public GameObject[] skillList;
 
-    [Header("보스전")]
+    [Header("스테이지")]
+    public int stage = 0;
+
+    //[Header("보스전")]
     public bool isBossPhase;
-    public float surviveTime;
-    public float restTime;
-
-    [Header("클리어 시 나오는 지도")]
-    public GameObject map;
+    //public float surviveTime;
+    //public float restTime;
 
 
-    [Header("퀘스트 판넬")]
-    public GameObject questPanel;
+    [Header("퀘스트 매니저")]
+    public GameObject questManager;
 
     [Header("Lose 판넬")]
     //public GameObject losePanel;
@@ -78,6 +75,9 @@ public class GameManager : MonoBehaviour
     [Header("스킬 레벨 정보")]
     public WeaponStats weaponStats;
 
+    [Header("게임 클리어 Boolean")]
+    public bool isWin = false;
+
     public static float GameTime { get; set; } = 0;
     public static bool gameStop = false;
 
@@ -89,12 +89,13 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         GameTime += Time.deltaTime;
+        questManager.GetComponent<QuestController>().goalTime -= Time.deltaTime;
         SetExpAndLevel();
         //ShowQuestText();
-        if(isBossPhase)
-        {
-            questPanel.SetActive(false);
-        }
+        //if(isBossPhase)
+        //{
+        //    questManager.SetActive(false);
+        //}
     }
 
     //void LateUpdate()
@@ -119,13 +120,11 @@ public class GameManager : MonoBehaviour
 
     public void Stop()
     {
-        isLive = false;
         Time.timeScale = 0;
     }
 
     public void Resume()
     {
-        isLive = true;
         Time.timeScale = 1;
     }
     public void GameOver(bool isWin)
@@ -167,6 +166,11 @@ public class GameManager : MonoBehaviour
     }
     public void GetOrSetSkill(Define.Skills weaponName)
     {
+        if (weaponName == Define.Skills.Koran)
+        {
+            questManager.GetComponent<QuestController>().goalLevel--;
+        }
+
         // 스킬 레벨 업
         skillLevel[weaponName]++;
         AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
@@ -248,68 +252,6 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
-    }
-
-<<<<<<< Updated upstream
-=======
-    public void ShowText()
-    {
-        textPanel.SetActive(true);
-        textPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "조각을 " + itemNum + "개 획득했다.";
-        isShowText = true;
-        //Time.timeScale = 0;
-    }
-
-    public void HideText()
-    {
-        if (Input.GetButtonDown("Jump") && isShowText)
-        {
-            textPanel.SetActive(false);
-            //Time.timeScale = 1;
-            isShowText = false;
-        }
-    }
-
-    public void ShowQuestText()
-    {
-        if (stage == 0)
-        {
-            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "몬스터를 잡아 유물조각을 수집하라! (" + questItem + "/3";
-        }
-        else if (stage == 1)
-        {
-            questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "카바 주변을 3바퀴 돌아라! (" + rotateNum + "/3";
-            if(rotateNum == 3)
-            {
-                foreach(GameObject item in items)
-                {
-                    try
-                    {
-                        item.SetActive(true);
-                    }
-                    catch
-                    {
-
-                    }
-                }
-                questPanel.transform.GetChild(0).transform.GetComponent<TMP_Text>().text = "맵을 탐색하여 유물조각을 수집하라! (" + itemNum + "/3";
-            }
-        }
-    }
-
-    public void ShowMap()
-    {
-        if (itemNum == 3 || questItem >= 3)
-        {
-            //isBossPhase = true;
-            map.SetActive(true);
-        }
-    }
->>>>>>> Stashed changes
-    public void NextStage() //버튼
-    {
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
-        SceneManager.LoadScene(stage+1);
     }
 
     // 중지 버튼

@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class QuestController : MonoBehaviour
@@ -22,12 +23,68 @@ public class QuestController : MonoBehaviour
     [Header("퀘스트 3 텍스트")]
     public TMP_Text text3;
 
+    [Header("유물 떨구기 카운트")]
+    public int dropcount = 0;
+
+    [Header("유물 획득 카운트")]
+    public int count = 0;
+
+    [Header("퀘스트 성공 패널")]
+    public GameObject successPanel;
+
+    [Header("퀘스트 성공 boolean")]
+    public bool isQuestOneClear = false;
+    public bool isQuestTwoClear = false;
+    public bool isQuestThreeClear = false;
+
+    private void Update()
+    {
+        CheckSuccess();
+    }
+
 
     public void CheckSuccess()
     {
+        // 해금
         if (goalKill < 400)
         {
-            text1.text = goalKill + "/500";
+            text1.text = "몬스터 처치: "+ goalKill + "/500";
         }
+        
+        if (goalTime < 180)
+        {
+            text2.text = "남은 생존 시간: " + ((int)goalTime).ToString();
+        }
+        if (goalLevel < 4)
+        {
+            text3.text = "코란 레벨: " + goalLevel + "/5";
+        }
+
+        // 성공
+        if (goalKill < 0 && !isQuestOneClear)
+        {
+            dropcount++;
+            isQuestOneClear = true;
+        }
+        if (goalTime < 0 && !isQuestTwoClear)
+        {
+            dropcount++;
+            isQuestTwoClear = true;
+        }
+        if (goalLevel < 1 && !isQuestThreeClear)
+        {
+            dropcount++;
+            isQuestThreeClear = true;
+        }
+        if (count == 3)
+        {
+            Invoke("Success", 1.0f);
+        }
+    }
+
+    public void Success()
+    {
+        successPanel.SetActive(true);
+        GameManager.Instance.isWin = true;
     }
 }
