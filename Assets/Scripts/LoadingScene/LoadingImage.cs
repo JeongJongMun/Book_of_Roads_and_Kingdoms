@@ -25,7 +25,7 @@ public class LoadingImage : MonoBehaviour
         yield return new WaitForSeconds(3f);
         image.sprite = sprites[2];
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Phase1");
+        SceneManager.LoadScene("CutScene");
 
     }
 }
