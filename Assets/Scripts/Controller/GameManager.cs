@@ -33,10 +33,13 @@ public class GameManager : MonoBehaviour
     [Header("스킬들 부모")]
     public GameObject skillParent;
 
+    [Header("중지 패널")]
+    public GameObject pausePanel;
+
     [Header("설정 패널")]
     public GameObject settingPanel;
 
-    [Header("설정창 스킬 목록")]
+    [Header("일시정지창 스킬 목록")]
     public GameObject[] skillList;
 
     [Header("보스전")]
@@ -68,7 +71,7 @@ public class GameManager : MonoBehaviour
     [Header("현재 스킬 레벨")]
     public Dictionary<Define.Skills, int> skillLevel = new Dictionary<Define.Skills, int>()
     {
-        {Define.Skills.Born, 0},
+        {Define.Skills.Bone, 0},
         {Define.Skills.Candle , 0},
         {Define.Skills.Koran , 0},
         {Define.Skills.Wand , 0},
@@ -82,9 +85,6 @@ public class GameManager : MonoBehaviour
         {Define.Skills.Shield , 0},
         {Define.Skills.Armor , 0},
     };
-
-    [Header("보유 스킬")]
-    public List<SkillController> skillControllers = new List<SkillController>();
 
     [Header("스킬 레벨 정보")]
     public WeaponStats weaponStats;
@@ -101,19 +101,20 @@ public class GameManager : MonoBehaviour
     {
         GameTime += Time.deltaTime;
         SetExpAndLevel();
-        RotateCheck();
         ShowQuestText();
         if(isBossPhase)
         {
             questPanel.SetActive(false);
         }
-        if(SceneManager.GetActiveScene().buildIndex == 1)
-        if (checkWayPoints[3])
+        if(SceneManager.GetActiveScene().buildIndex == 2)
         {
-            rotateNum++;
-            for(int i = 0; i < 4; i++)
+            if (checkWayPoints[3])
             {
-                checkWayPoints[i] = false;
+                rotateNum++;
+                for (int i = 0; i < 4; i++)
+                {
+                    checkWayPoints[i] = false;
+                }
             }
         }
     }
@@ -188,8 +189,6 @@ public class GameManager : MonoBehaviour
     }
     public void GetOrSetSkill(Define.Skills weaponName)
     {
-        Debug.LogFormat("{0} Level {1} -> {2}", weaponName.ToString(), skillLevel[weaponName], skillLevel[weaponName]+1);
-
         // 스킬 레벨 업
         skillLevel[weaponName]++;
 
@@ -198,20 +197,77 @@ public class GameManager : MonoBehaviour
             GameObject _skill = Resources.Load<GameObject>("Skills/" + weaponName.ToString());
             // 스킬 생성
             Instantiate(_skill, skillParent.transform);
-            // 스킬을 보유 스킬에 추가
-            if (!skillControllers.Contains(_skill.GetComponent<SkillController>())) 
+        }
+        // 이미 보유 중이라면 레벨업
+        else
+        {
+            foreach (SkillController skill in skillParent.GetComponentsInChildren<SkillController>())
             {
-                skillControllers.Add(_skill.GetComponent<SkillController>());
-            }
-            // 스킬을 설정창에 표시
-            foreach (GameObject skill in skillList)
-            {
-                if (!skill.activeSelf)
+                if (skill.weaponType == weaponName)
                 {
-                    skill.SetActive(true);
-                    skill.transform.GetChild(0).GetComponent<TMP_Text>().text = weaponName.ToString() + "\n" + "Lv " + skillLevel[weaponName];
-                    break;
+                    skill._level++;
+                    skill.WeaponLevelUp();
                 }
+            }
+        }
+
+        // 스킬을 일시정지 창에 표시
+        SetSkillInPause(weaponName);
+    }
+    public void SetSkillInPause(Define.Skills weaponName)
+    {
+        string name = "";
+
+        switch (weaponName)
+        {
+            case Define.Skills.Bone:
+                name = "뼈다귀";
+                break;
+            case Define.Skills.Candle:
+                name = "촛농";
+                break;
+            case Define.Skills.Koran:
+                name = "코란";
+                break;
+            case Define.Skills.Wand:
+                name = "카두세우스의 지팡이";
+                break;
+            case Define.Skills.Cat:
+                name = "고양이";
+                break;
+            case Define.Skills.Shortbow:
+                name = "단궁";
+                break;
+            case Define.Skills.Samshir:
+                name = "삼쉬르";
+                break;
+            case Define.Skills.Quiver:
+                name = "화살통";
+                break;
+            case Define.Skills.Damascus:
+                name = "다마스커스";
+                break;
+            case Define.Skills.Water:
+                name = "물";
+                break;
+            case Define.Skills.Gold:
+                name = "금";
+                break;
+            case Define.Skills.Shield:
+                name = "방패";
+                break;
+            case Define.Skills.Armor:
+                name = "갑옷";
+                break;
+            default:
+                break;
+        }
+        foreach (GameObject skill in skillList)
+        {
+            if (skill.name == weaponName.ToString())
+            {
+                skill.transform.GetChild(0).GetComponent<TMP_Text>().text = name + "\n" + "Lv " + skillLevel[weaponName];
+                break;
             }
         }
     }
@@ -262,11 +318,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    void RotateCheck() //2페이즈퀘스트
-    {
-        
-    }
     public void ShowMap()
     {
         if (itemNum == 3 || questItem >= 3)
@@ -280,12 +331,18 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(stage+1);
     }
 
+    // 중지 버튼
+    public void OnClickPauseBtn()
+    {
+        pausePanel.SetActive(!pausePanel.activeSelf);
+        if (Time.timeScale == 0)
+            Resume();
+        else Stop();
+    }
+
     // 설정 버튼
     public void OnClickSettingBtn()
     {
         settingPanel.SetActive(!settingPanel.activeSelf);
-        if (Time.timeScale == 0)
-            Resume();
-        else Stop();
     }
 }

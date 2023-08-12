@@ -5,7 +5,7 @@ public class PlayerController : BaseController
 {
 
     [Header("조이스틱 객체")]
-    public VariableJoystick joystick;
+    public FloatingJoystick joystick;
 
     [Header("Ground의 다음 위치")]
     public Vector3 nextPos;

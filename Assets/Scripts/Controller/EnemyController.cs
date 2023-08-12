@@ -9,13 +9,11 @@ public class EnemyController : MonoBehaviour
     public float maxHealth;
     public float damage;
     public long exp;
-    //public RuntimeAnimatorController[] animCon;
     public bool isDead;
     public bool isBoss;
     public Rigidbody2D target;
     Rigidbody2D rigid;
     SpriteRenderer spriter;
-    Animator anim;
     WaitForFixedUpdate wait;
     Collider2D coll;
 
@@ -32,15 +30,12 @@ public class EnemyController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
-        //anim = GetComponent<Animator>();
         wait = new WaitForFixedUpdate();
         coll = GetComponent<Collider2D>();
     }
 
     void FixedUpdate()
     {
-        //anim.SetBool("Dead", isDead);
-        //if (isDead || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
         Vector2 dirVec = target.position - rigid.position;
         Vector2 moveVec = dirVec.normalized * speed * Time.fixedDeltaTime;
         spriter.flipX = dirVec.x > 0 ? true : false;
@@ -158,27 +153,5 @@ public class EnemyController : MonoBehaviour
         TMP_Text floatingText = Instantiate(damagedText, transform.position, Quaternion.identity); 
 
         floatingText.text = damage.ToString();
-        Debug.Log(damage);
-        //StartCoroutine(MoveAndFadeOut(floatingText));
     }
-
-    //private IEnumerator MoveAndFadeOut(TMP_Text floatingText)
-    //{
-    //    Vector3 startPosition = floatingText.transform.position;
-    //    Vector3 targetPosition = startPosition + Vector3.up;
-
-    //    float elapsedTime = 0f;
-
-    //    while (elapsedTime < lifeTime)
-    //    {
-    //        floatingText.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / lifeTime);
-    //        elapsedTime += Time.deltaTime;
-
-    //        floatingText.color = new Color(floatingText.color.r, floatingText.color.g, floatingText.color.b, 1f - (elapsedTime / lifeTime));
-
-    //        yield return null;
-    //    }
-
-    //    Destroy(floatingText.gameObject);
-    //}
 }

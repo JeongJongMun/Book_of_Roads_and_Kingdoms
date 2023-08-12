@@ -175,7 +175,7 @@ public class PlayerStat : Stat
 
         Level += 1;
         Exp = 0;
-        MaxExp += Math.Max(100, (long)(_maxExp * 1.1));
+        MaxExp += Math.Max(10, (long)(_maxExp * 1.1));
     }
 
     //void SetWeaponLevel()

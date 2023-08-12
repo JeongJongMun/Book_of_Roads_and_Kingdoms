@@ -39,7 +39,7 @@ public class SkillSelect : MonoBehaviour
     // 스킬 선택시 스킬 획득OR레벨업
     public void OnClickSkill(GameObject skill)
     {
-        Define.Skills weaponName = (Define.Skills)Enum.Parse(typeof(Define.Skills), skill.transform.GetChild(1).name);
+        Define.Skills weaponName = (Define.Skills)Enum.Parse(typeof(Define.Skills), skill.name);
         GameManager.Instance.GetOrSetSkill(weaponName);
         GameManager.Instance.Resume();
         this.gameObject.SetActive(false);

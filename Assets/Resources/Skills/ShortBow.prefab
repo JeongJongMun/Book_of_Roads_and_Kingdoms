@@ -44,11 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d09b7ebdc83b44e83f49adadcc6d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
+  weaponType: 7
   _damage: 10
   _speed: 8
   _level: 1
-  _force: 1
-  _penetrate: 1
   _countPerCreate: 1
   _cooldown: 2

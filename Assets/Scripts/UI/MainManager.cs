@@ -3,8 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
+    public GameObject nextStageGroup;
+
     public void OnClickStartBtn()
     {
-        SceneManager.LoadScene("Playing");
+        nextStageGroup.SetActive(true);
     }
 }

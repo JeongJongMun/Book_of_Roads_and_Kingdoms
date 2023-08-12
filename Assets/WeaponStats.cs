@@ -8,14 +8,55 @@ public class WeaponStats : MonoBehaviour
     public string weaponName;
     public List<Dictionary<string, int>> weaponLevelDatas = new List<Dictionary<string, int>>();
 
-    public List<Dictionary<string, int>> Initialize(Define.Skills skillName)
+    public List<Dictionary<string, int>> StatInitialize(Define.Skills skillName)
     {
+        weaponLevelDatas.Clear();
         switch (skillName)
         {
-            case Define.Skills.Born:
+            case Define.Skills.Bone:
                 for (int i = 0; i < 5; i++)
                 {
-                    Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_born[i] }, { "countPerCreate", countPerCreate_born[i] }, };
+                    Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_bone[i] }, { "countPerCreate", countPerCreate_born[i] }, };
+                    weaponLevelDatas.Add(level);
+                }
+                return weaponLevelDatas;
+
+            case Define.Skills.Candle:
+                for (int i = 0; i < 5; i++)
+                {
+                    Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_candle[i] }, { "countPerCreate", countPerCreate_candle[i] }, };
+                    weaponLevelDatas.Add(level);
+                }
+                return weaponLevelDatas;
+
+            case Define.Skills.Cat:
+                for (int i = 0; i < 5; i++)
+                {
+                    Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_cat[i] }, { "countPerCreate", countPerCreate_cat[i] }, };
+                    weaponLevelDatas.Add(level);
+                }
+                return weaponLevelDatas;
+
+            case Define.Skills.Shortbow:
+                for (int i = 0; i < 5; i++)
+                {
+                    Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_shortbow[i] }, { "countPerCreate", countPerCreate_shortbow[i] }, };
+                    weaponLevelDatas.Add(level);
+                }
+                return weaponLevelDatas;
+
+            case Define.Skills.Koran:
+                for (int i = 0; i < 5; i++)
+                {
+                    Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_koran[i] }, { "countPerCreate", countPerCreate_koran[i] }, };
+                    weaponLevelDatas.Add(level);
+                }
+                return weaponLevelDatas;
+
+            case Define.Skills.Samshir:
+                for (int i = 0; i < 5; i++)
+                {
+                    Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_samshir[i] }, { "countPerCreate", countPerCreate_samshir[i] }, };
                     weaponLevelDatas.Add(level);
                 }
                 return weaponLevelDatas;
@@ -25,7 +66,25 @@ public class WeaponStats : MonoBehaviour
         }
     }
 
-    private List<int> damage_born = new List<int> { 10, 10, 20, 30, 50 };
+    private List<int> damage_bone = new List<int> { 10, 10, 20, 30, 50 };
     private List<int> countPerCreate_born = new List<int> { 1, 2, 2, 3, 3 };
+
+    private List<int> damage_candle = new List<int> { 10, 10, 20, 30, 50 };
+    private List<int> countPerCreate_candle = new List<int> { 1, 2, 2, 3, 3 };
+
+    private List<int> damage_cat = new List<int> { 5, 5, 5, 5, 5 };
+    private List<int> countPerCreate_cat = new List<int> { 3, 5, 7, 10, 15 };
+
+    //코란은 탄막이 날아가는 방식이 아니라 주석달아놈
+    private List<int> damage_koran = new List<int> { 1, 2, 2, 3, 4 };
+    private List<int> countPerCreate_koran = new List<int> { 1, 2, 2, 3, 4 };
+
+    private List<int> damage_shortbow = new List<int> { 10, 10, 10, 10, 10 };
+    private List<int> countPerCreate_shortbow = new List<int> { 1, 2, 3, 4, 5 };
+
+    //삼쉬르는 탄막이 아니라 주석달아놈
+    private List<int> damage_samshir = new List<int> { 5, 10, 10, 15, 20 };
+    private List<int> countPerCreate_samshir = new List<int> { 1, 2, 2, 3, 3 };
+
 
 }

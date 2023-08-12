@@ -10,7 +10,7 @@ public class Define
 
     public enum Skills
     {
-        Born        = 1,
+        Bone        = 1,
         Candle      = 2,
         Koran       = 3,
         Wand        = 4,
@@ -23,6 +23,7 @@ public class Define
         Gold        = 11,
         Shield      = 12,
         Armor       = 13,
+        Quiver      = 14,
 
     }
     public enum MonsterStyle

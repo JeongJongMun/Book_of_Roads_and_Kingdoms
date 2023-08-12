@@ -80,7 +80,6 @@ public class Spawner : MonoBehaviour
         while (stringReader != null)
         {
             string line = stringReader.ReadLine();
-            Debug.Log(line);
 
             if (line == null)
                 break;
@@ -99,10 +98,7 @@ public class Spawner : MonoBehaviour
             spawnData.delay = float.Parse(line.Split(',')[1]);
             spawnData.spawnTransNum = int.Parse(line.Split(',')[2]);
 
-
-
             spawnDataList.Add(spawnData);
-            Debug.Log("z");
         }
 
         //텍스트 파일 닫기

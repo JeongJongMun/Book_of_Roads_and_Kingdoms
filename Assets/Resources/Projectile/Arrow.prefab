@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2193423527217483014}
   m_Layer: 0
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,9 +165,4 @@ MonoBehaviour:
   dirVec: {x: 1, y: 0, z: 0}
   damage: 1
   speed: 1
-  force: 0
-  size: 1
-  panatrate: 1
   rotationSpeed: 50
-  lifeTime: 2
-  createTime: 0
