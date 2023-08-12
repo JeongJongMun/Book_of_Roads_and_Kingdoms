@@ -48,25 +48,25 @@ public class QuestController : MonoBehaviour
         // 해금
         if (goalKill < 400)
         {
-            text1.text = "몬스터 처치: "+ goalKill + "/500";
+            text1.text = "몬스터 처치: "+ (500 - goalKill) + "/500";
         }
         
         if (goalTime < 180)
         {
-            text2.text = "남은 생존 시간: " + ((int)goalTime).ToString();
+            text2.text = "남은 생존 시간: " + (300 - (int)goalTime).ToString() + "/300";
         }
         if (goalLevel < 4)
         {
-            text3.text = "코란 레벨: " + goalLevel + "/5";
+            text3.text = "코란 레벨: " + (5 - goalLevel) + "/5";
         }
 
         // 성공
-        if (goalKill < 0 && !isQuestOneClear)
+        if (goalKill < 1 && !isQuestOneClear)
         {
             dropcount++;
             isQuestOneClear = true;
         }
-        if (goalTime < 0 && !isQuestTwoClear)
+        if (goalTime < 1 && !isQuestTwoClear)
         {
             dropcount++;
             isQuestTwoClear = true;

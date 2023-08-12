@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour
     [Header("퀘스트 매니저")]
     public GameObject questManager;
 
-    [Header("Lose 판넬")]
-    //public GameObject losePanel;
+    [Header("패배 판넬")]
+    public GameObject losePanel;
 
 
     [Header("현재 스킬 레벨")]
@@ -127,12 +127,10 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
     }
-    public void GameOver(bool isWin)
+    public void GameOver()
     {
-        if (isWin)
-        {
-            //ShowMap();
-        }
+        losePanel.SetActive(true);
+        Stop();
     }
 
     public void ReStart() //LosePanel에 넣을거

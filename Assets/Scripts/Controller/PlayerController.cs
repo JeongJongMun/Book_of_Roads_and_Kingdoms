@@ -20,12 +20,6 @@ public class PlayerController : BaseController
     [Header("플레이어 스텟")]
     public PlayerStat _stat;
 
-    [Header("아이템 수집")]
-    GameObject scanObj;
-    public float scanDistance;
-    RaycastHit2D hit;
-    
-
     protected override void Init()
     {
         _stat = GetComponent<PlayerStat>();
@@ -76,7 +70,29 @@ public class PlayerController : BaseController
     }
 
 
-    void OnCollisionStay2D(Collision2D collision)
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (isHit) return;
+    //    if (GameManager.Instance.isWin) return;
+    //    if (collision.gameObject.tag == "Enemy")
+    //    {
+    //        StartCoroutine(KnockBack());
+    //        Debug.LogFormat("{0} 에게맞음", collision.transform.name);
+
+    //        _stat.HP -= (int)collision.gameObject.GetComponent<EnemyController>().damage;
+    //        if (_stat.HP <= 0)
+    //        {
+    //            GameManager.Instance.GameOver();
+    //            AudioManager.instance.PlaySfx(AudioManager.Sfx.StageFail);
+    //            return;
+    //        }
+    //        isHit = true;
+    //        _sprite.color = new Color(1, 0.5f, 0.5f, 1);
+    //        Invoke("ExitHit", hitTime);
+    //    }
+    //}
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (isHit) return;
         if (GameManager.Instance.isWin) return;
@@ -84,11 +100,11 @@ public class PlayerController : BaseController
         {
             StartCoroutine(KnockBack());
             _stat.HP -= (int)collision.gameObject.GetComponent<EnemyController>().damage;
+            Debug.LogFormat("{0} 에게맞음", collision.transform.position);
             if (_stat.HP <= 0)
             {
-                GameManager.Instance.GameOver(false);
+                GameManager.Instance.GameOver();
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.StageFail);
-                //GameManager.Instance.Stop();
                 return;
             }
             isHit = true;
@@ -96,6 +112,8 @@ public class PlayerController : BaseController
             Invoke("ExitHit", hitTime);
         }
     }
+
+
     void ExitHit()
     {
         isHit = false;

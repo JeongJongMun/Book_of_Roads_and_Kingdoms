@@ -48,7 +48,11 @@ public class WeaponStats : MonoBehaviour
             case Define.Skills.Koran:
                 for (int i = 0; i < 5; i++)
                 {
-                    Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_koran[i] }, { "countPerCreate", countPerCreate_koran[i] }, };
+                    Dictionary<string, int> level = new Dictionary<string, int>() { 
+                        { "damage", damage_koran[i] }, 
+                        { "countPerCreate", countPerCreate_koran[i] },
+                        { "size", size_koran[i] },
+                    };
                     weaponLevelDatas.Add(level);
                 }
                 return weaponLevelDatas;
@@ -57,6 +61,14 @@ public class WeaponStats : MonoBehaviour
                 for (int i = 0; i < 5; i++)
                 {
                     Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_samshir[i] }, { "countPerCreate", countPerCreate_samshir[i] }, };
+                    weaponLevelDatas.Add(level);
+                }
+                return weaponLevelDatas;
+
+            case Define.Skills.Wand:
+                for (int i = 0; i < 5; i++)
+                {
+                    Dictionary<string, int> level = new Dictionary<string, int>() { { "damage", damage_wand[i] }, { "countPerCreate", countPerCreate_wand[i] }, };
                     weaponLevelDatas.Add(level);
                 }
                 return weaponLevelDatas;
@@ -78,6 +90,7 @@ public class WeaponStats : MonoBehaviour
     //코란은 탄막이 날아가는 방식이 아니라 주석달아놈
     private List<int> damage_koran = new List<int> { 1, 2, 2, 3, 4 };
     private List<int> countPerCreate_koran = new List<int> { 1, 2, 2, 3, 4 };
+    private List<int> size_koran = new List<int> { 1, 1, 2, 3, 4 };
 
     private List<int> damage_shortbow = new List<int> { 10, 10, 10, 10, 10 };
     private List<int> countPerCreate_shortbow = new List<int> { 1, 2, 3, 4, 5 };
@@ -86,5 +99,7 @@ public class WeaponStats : MonoBehaviour
     private List<int> damage_samshir = new List<int> { 5, 10, 10, 15, 20 };
     private List<int> countPerCreate_samshir = new List<int> { 1, 2, 2, 3, 3 };
 
+    private List<int> damage_wand = new List<int> { 5, 10, 10, 15, 20 };
+    private List<int> countPerCreate_wand = new List<int> { 1, 2, 2, 3, 3 };
 
 }
