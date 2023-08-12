@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SkillSelect : MonoBehaviour
@@ -40,8 +41,13 @@ public class SkillSelect : MonoBehaviour
     public void OnClickSkill(GameObject skill)
     {
         Define.Skills weaponName = (Define.Skills)Enum.Parse(typeof(Define.Skills), skill.name);
+        int _level = skill.transform.GetChild(2).GetComponent<TMP_Text>().text[3] - '0';
+        string temp = skill.transform.GetChild(2).GetComponent<TMP_Text>().text;
+        _level++;
+
+        skill.transform.GetChild(2).GetComponent<TMP_Text>().text = temp.Substring(0, 3) + _level;
         GameManager.Instance.GetOrSetSkill(weaponName);
         GameManager.Instance.Resume();
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

@@ -27,6 +27,7 @@ public abstract class SkillController : MonoBehaviour
         _player = GameManager.Instance.playerObject;
         _playerStat = GameManager.Instance.player.GetComponent<PlayerStat>();
         _weaponStatGetter = GameManager.Instance.weaponStats;
+        if (weaponType == Define.Skills.Korand) return;
         _weaponStat = _weaponStatGetter.StatInitialize(weaponType);
         for (int i = 0; i < 5; i++)
         {

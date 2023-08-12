@@ -100,7 +100,6 @@ public class PlayerController : BaseController
         {
             StartCoroutine(KnockBack());
             _stat.HP -= (int)collision.gameObject.GetComponent<EnemyController>().damage;
-            Debug.LogFormat("{0} 에게맞음", collision.transform.position);
             if (_stat.HP <= 0)
             {
                 GameManager.Instance.GameOver();

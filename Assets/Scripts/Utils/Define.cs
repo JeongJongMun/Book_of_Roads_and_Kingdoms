@@ -24,6 +24,7 @@ public class Define
         Shield      = 12,
         Armor       = 13,
         Quiver      = 14,
+        Korand      = 15,
 
     }
     public enum MonsterStyle

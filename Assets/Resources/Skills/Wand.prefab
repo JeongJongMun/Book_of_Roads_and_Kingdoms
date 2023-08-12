@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 4
-  _damage: 1
+  _damage: 10
   _speed: 1
   _level: 1
   _countPerCreate: 1
   _cooldown: 1
+  _size: 1

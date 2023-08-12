@@ -189,6 +189,25 @@ public class GameManager : MonoBehaviour
                     skill.WeaponLevelUp();
                 }
             }
+            bool isCombine = CheckCombination();
+            if (isCombine)
+            {
+                foreach (GameObject obj in skillParent.GetComponentsInChildren<GameObject>())
+                {
+                    if (obj.GetComponent<SkillController>().weaponType == Define.Skills.Koran)
+                    {
+                        Destroy(obj);
+                    }
+                    else if (obj.GetComponent<SkillController>().weaponType == Define.Skills.Wand)
+                    {
+                        Destroy(obj);
+                    }
+                }
+                GameObject _skill = Resources.Load<GameObject>("Skills/Korand");
+                // 스킬 생성
+                Instantiate(_skill, skillParent.transform);
+
+            }
         }
 
         // 스킬을 일시정지 창에 표시
@@ -239,6 +258,9 @@ public class GameManager : MonoBehaviour
             case Define.Skills.Armor:
                 name = "갑옷";
                 break;
+            case Define.Skills.Korand:
+                name = "코란드";
+                break;
             default:
                 break;
         }
@@ -250,6 +272,31 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public bool CheckCombination()
+    {
+        bool isOne = false;
+        foreach (SkillController skill in skillParent.GetComponentsInChildren<SkillController>()) 
+        { 
+            if (skill.weaponType == Define.Skills.Koran && skill._level >= 1)
+            {
+                if (isOne == true)
+                {
+                    return true;
+                }
+                isOne = true;
+            }
+            else if (skill.weaponType == Define.Skills.Wand && skill._level >= 1)
+            {
+                if (isOne == true)
+                {
+                    return true;
+                }
+                isOne = true;
+            }
+        }
+        return false;
     }
 
     // 중지 버튼

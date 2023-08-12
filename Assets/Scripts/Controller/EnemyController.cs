@@ -21,6 +21,9 @@ public class EnemyController : MonoBehaviour
     [Header("코란 피격 간격")]
     public float koranTerm = 0;
 
+    [Header("코란드 피격 간격")]
+    public float korandTerm = 0;
+
     [Header("피격 데미지 텍스트")]
     public TMP_Text damagedText;
 
@@ -46,6 +49,7 @@ public class EnemyController : MonoBehaviour
     void FixedUpdate()
     {
         if (koranTerm >= 0) koranTerm -= Time.deltaTime;
+        if (korandTerm >= 0) korandTerm -= Time.deltaTime;
         if (GameManager.Instance.isWin) return;
         Vector2 dirVec = target.position - rigid.position;
         Vector2 moveVec = dirVec.normalized * speed * Time.fixedDeltaTime;
@@ -103,6 +107,7 @@ public class EnemyController : MonoBehaviour
     public void OnDamaged(int damage)
     {
         if (koranTerm > 0) return;
+        if (korandTerm > 0) return;
         int calculateDamage = Mathf.Max(damage, 1); // 방어력 만큼 깍아야함
         health -= calculateDamage;
 

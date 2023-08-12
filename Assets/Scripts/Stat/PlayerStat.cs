@@ -176,7 +176,8 @@ public class PlayerStat : Stat
         Level += 1;
         Exp = 0;
         MaxExp += Math.Max(10, (long)(_maxExp * 1.1));
-        MaxExp += Math.Max(10, (long)(_maxExp * 1.1));
+        MaxHP += Math.Max(10, (int)(_maxExp * 1.1));
+        HP = MaxHP;
     }
 
     //void SetWeaponLevel()
