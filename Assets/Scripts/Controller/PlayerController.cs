@@ -79,7 +79,7 @@ public class PlayerController : BaseController
     void OnCollisionStay2D(Collision2D collision)
     {
         if (isHit) return;
-        if (!GameManager.Instance.isWin) return;
+        if (GameManager.Instance.isWin) return;
         if (collision.gameObject.tag == "Enemy")
         {
             StartCoroutine(KnockBack());

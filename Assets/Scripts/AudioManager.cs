@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
 
 
     public enum Bgm { Menu, Mekka, Jerusalem }
-    public enum Sfx { bone, fireballSpell, fireballCrack, LevelUp, Sanshir, StageFail, UiButton, Walk}
+    public enum Sfx { bone, fireballSpell, fireballCrack, LevelUp, Sanshir, StageFail, UiButton, Walk, Bow, GoldMaskEat, Rock}
 
     void Awake()
     {
@@ -37,10 +37,6 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        GameObject walkObject = new GameObject("walkPlayer");
-        walkObject.transform.parent = transform;
-        walkPlayer = walkObject.AddComponent<AudioSource>();
-        walkPlayer.clip = walkClip;
         Init();
         PlayBgm(Bgm.Menu);
     }

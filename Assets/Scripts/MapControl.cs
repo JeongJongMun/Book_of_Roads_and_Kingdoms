@@ -32,6 +32,10 @@ public class MapControl : MonoBehaviour
     {
         //AudioManager.instance.PlaySfx(AudioManager.Sfx.UiButton);
         Debug.Log("z");
+        if(stage == 1)
+        {
+            AudioManager.instance.PlayBgm(AudioManager.Bgm.Mekka);
+        }
         SceneManager.LoadScene(stage);
 
     }

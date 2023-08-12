@@ -14,6 +14,7 @@ public class ThrowingRock : Projectile
         if (go.CompareTag("Enemy"))
         {
             go.GetComponent<EnemyController>().OnDamaged(damage);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Rock);
             Destroy(gameObject);
         }
     }

@@ -13,6 +13,7 @@ public class QuestItem : MonoBehaviour
         if (collision.tag == "Player")
         {
             GameManager.Instance.questManager.GetComponent<QuestController>().count++;
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.GoldMaskEat);
             Destroy(this.gameObject);
             Debug.Log("¸¶½ºÅ© È¹µæ!");
 
