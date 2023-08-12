@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SpawnData0 1
   m_EditorClassIdentifier: 
   id: 1
-  maxHp: 20
-  hp: 20
-  damage: 10
-  exp: 5
+  maxHp: 15
+  hp: 15
+  damage: 6
+  exp: 3
   speed: 4
   delay: 0
   spawnTransNum: 0
