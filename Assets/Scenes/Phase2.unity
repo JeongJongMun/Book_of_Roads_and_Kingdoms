@@ -638,6 +638,7 @@ MonoBehaviour:
   _type: 0
   joystick: {fileID: 1083055053}
   nextPos: {x: 0, y: 0, z: 0}
+  isWalking: 0
   hitTime: 0.5
   scaner: {fileID: 27583004}
   isHit: 0
@@ -7641,6 +7642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 27583009}
   smoothing: 0.2
+  speed: 2
 --- !u!1 &1386079190
 GameObject:
   m_ObjectHideFlags: 0
@@ -29332,6 +29334,8 @@ MonoBehaviour:
   checkWayPoints: 00000000
   questPanel: {fileID: 1725545402}
   losePanel: {fileID: 1443593010}
+  skillControllers: []
+  weaponStats: {fileID: 0}
 --- !u!4 &1700789499
 Transform:
   m_ObjectHideFlags: 0

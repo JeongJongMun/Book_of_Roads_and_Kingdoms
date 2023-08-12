@@ -12,10 +12,7 @@ public class MapControl : MonoBehaviour
 
     void Awake()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
             GetComponent<Animator>().SetTrigger("isOpened");
-        }
     }
 
     // Update is called once per frame
@@ -26,6 +23,8 @@ public class MapControl : MonoBehaviour
 
     public void goStage(int stage)
     {
+        if (stage == 2)
+            return;
         SceneManager.LoadScene(stage);
 
     }

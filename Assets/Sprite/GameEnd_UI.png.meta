@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 39f7443a101084a4ea45ad753d54286d
+guid: 1bc868986e768144b8a613246c3cafa3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,14 +131,14 @@ TextureImporter:
         width: 587
         height: 451
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 999a182068eef1745a2034dc9c50af9d
-      internalID: 1411526931
+      spriteID: c6a972824d4ade44e8cdcba76ee4f02e
+      internalID: -1790756696
       vertices: []
       indices: 
       edges: []
@@ -152,14 +152,14 @@ TextureImporter:
         width: 582
         height: 442
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8f6ac3af5fc64245b4f734b35b1b94c
-      internalID: -96400740
+      spriteID: fa6ebcff1dd44cd4e9bc91bc5ba9b970
+      internalID: -970191
       vertices: []
       indices: 
       edges: []
@@ -168,19 +168,19 @@ TextureImporter:
       name: GameEnd_UI_3
       rect:
         serializedVersion: 2
-        x: 12
-        y: 229
-        width: 650
-        height: 627
+        x: 5
+        y: 225
+        width: 604
+        height: 616
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82fd895ead019aa499220e0863459b5f
-      internalID: -1982321887
+      spriteID: f42f28ee0bfc8664f8958e53b11c1d84
+      internalID: -268433501
       vertices: []
       indices: 
       edges: []
@@ -189,19 +189,19 @@ TextureImporter:
       name: GameEnd_UI_4
       rect:
         serializedVersion: 2
-        x: 656
-        y: 224
-        width: 401
+        x: 680
+        y: 252
+        width: 400
         height: 559
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46f93519f9a6a004f829603f7199574f
-      internalID: 1574771735
+      spriteID: d55af4a91efeb6e4a8bbedb825d1f8a6
+      internalID: 551308952
       vertices: []
       indices: 
       edges: []
@@ -217,11 +217,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GameEnd_UI_0: 1411526931
-      GameEnd_UI_1: 1329919032
-      GameEnd_UI_2: -96400740
-      GameEnd_UI_3: -1982321887
-      GameEnd_UI_4: 1574771735
+      GameEnd_UI_0: -1790756696
+      GameEnd_UI_1: -526944393
+      GameEnd_UI_2: -970191
+      GameEnd_UI_3: -268433501
+      GameEnd_UI_4: 551308952
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

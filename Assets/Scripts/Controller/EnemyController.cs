@@ -80,13 +80,13 @@ public class EnemyController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Skill") || isDead) return;
-        StartCoroutine(KnockBack());
+        StartCoroutine("KnockBack");
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Skill") || isDead) return;
-        StartCoroutine(KnockBack());
+        StartCoroutine("KnockBack");
     }
 
     public void OnDamaged(int damage)
