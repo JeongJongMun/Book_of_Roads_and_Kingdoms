@@ -5,14 +5,14 @@ using UnityEngine;
 public class QuestController : MonoBehaviour
 {
     // 스테이지 1 (메카) 퀘스트
-    [Header("퀘스트 1: 500킬")]
-    public int goalKill = 500;
+    [Header("퀘스트 1: 100킬")]
+    public int goalKill = 100;
 
-    [Header("퀘스트 2: 300초 생존")]
-    public float goalTime = 300.0f;
+    [Header("퀘스트 2: 150초 생존")]
+    public float goalTime = 150.0f;
 
-    [Header("퀘스트 3: 코란 5레벨")]
-    public int goalLevel = 5;
+    [Header("퀘스트 3: 코란 3레벨")]
+    public int goalLevel = 3;
 
     [Header("퀘스트 1 텍스트")]
     public TMP_Text text1;
@@ -46,18 +46,18 @@ public class QuestController : MonoBehaviour
     public void CheckSuccess()
     {
         // 해금
-        if (goalKill < 400)
+        if (goalKill < 50)
         {
-            text1.text = "몬스터 처치: "+ (500 - goalKill) + "/500";
+            text1.text = "몬스터 처치: "+ (100 - goalKill) + "/100";
         }
         
-        if (goalTime < 180)
+        if (goalTime < 90)
         {
-            text2.text = "남은 생존 시간: " + (300 - (int)goalTime).ToString() + "/300";
+            text2.text = "남은 생존 시간: " + (150 - (int)goalTime).ToString() + "/150";
         }
-        if (goalLevel < 4)
+        if (goalLevel < 2)
         {
-            text3.text = "코란 레벨: " + (5 - goalLevel) + "/5";
+            text3.text = "코란 레벨: " + (3 - goalLevel) + "/3";
         }
 
         // 성공

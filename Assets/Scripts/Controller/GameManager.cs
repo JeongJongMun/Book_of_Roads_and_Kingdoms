@@ -189,25 +189,25 @@ public class GameManager : MonoBehaviour
                     skill.WeaponLevelUp();
                 }
             }
-            bool isCombine = CheckCombination();
-            if (isCombine)
-            {
-                foreach (GameObject obj in skillParent.GetComponentsInChildren<GameObject>())
-                {
-                    if (obj.GetComponent<SkillController>().weaponType == Define.Skills.Koran)
-                    {
-                        Destroy(obj);
-                    }
-                    else if (obj.GetComponent<SkillController>().weaponType == Define.Skills.Wand)
-                    {
-                        Destroy(obj);
-                    }
-                }
-                GameObject _skill = Resources.Load<GameObject>("Skills/Korand");
-                // 스킬 생성
-                Instantiate(_skill, skillParent.transform);
+            //bool isCombine = CheckCombination();
+            //if (isCombine)
+            //{
+            //    foreach (GameObject obj in skillParent.GetComponentsInChildren<GameObject>())
+            //    {
+            //        if (obj.GetComponent<SkillController>().weaponType == Define.Skills.Koran)
+            //        {
+            //            Destroy(obj);
+            //        }
+            //        else if (obj.GetComponent<SkillController>().weaponType == Define.Skills.Wand)
+            //        {
+            //            Destroy(obj);
+            //        }
+            //    }
+            //    GameObject _skill = Resources.Load<GameObject>("Skills/Korand");
+            //    // 스킬 생성
+            //    Instantiate(_skill, skillParent.transform);
 
-            }
+            //}
         }
 
         // 스킬을 일시정지 창에 표시

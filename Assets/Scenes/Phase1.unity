@@ -727,9 +727,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7994238a08049d4599bdd8d64df22e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goalKill: 500
-  goalTime: 300
-  goalLevel: 5
+  goalKill: 100
+  goalTime: 150
+  goalLevel: 3
   text1: {fileID: 2123603607}
   text2: {fileID: 959327447}
   text3: {fileID: 1549197063}

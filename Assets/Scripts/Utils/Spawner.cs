@@ -65,7 +65,7 @@ public class Spawner : MonoBehaviour
         }
         else
         {
-            delay = spawnDataList[spawnIndex].delay;
+            delay = spawnDataList[spawnIndex].delay * 0.5f;
         }
     }
 
